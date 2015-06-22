@@ -14,6 +14,18 @@
 		DFAB37461B380CBD00CFB161 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFAB37451B380CBD00CFB161 /* Images.xcassets */; };
 		DFAB37491B380CBD00CFB161 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFAB37471B380CBD00CFB161 /* LaunchScreen.xib */; };
 		DFAB37551B380CBD00CFB161 /* CLTestTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAB37541B380CBD00CFB161 /* CLTestTaskTests.m */; };
+		DFFD768C1B3821100026EFD8 /* AKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD768B1B3821100026EFD8 /* AKConstants.m */; };
+		DFFD76901B38223B0026EFD8 /* AKUsersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD768F1B38223B0026EFD8 /* AKUsersListViewController.m */; };
+		DFFD76931B38225D0026EFD8 /* AKUsersListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76921B38225D0026EFD8 /* AKUsersListModel.m */; };
+		DFFD769A1B3823820026EFD8 /* AKUserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76991B3823820026EFD8 /* AKUserDetailViewController.m */; };
+		DFFD769D1B3823D00026EFD8 /* AKUserDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD769C1B3823D00026EFD8 /* AKUserDetailModel.m */; };
+		DFFD76A01B38241B0026EFD8 /* AKRandomUsersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD769F1B38241B0026EFD8 /* AKRandomUsersListViewController.m */; };
+		DFFD76A31B3824310026EFD8 /* AKRandomUsersListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76A21B3824310026EFD8 /* AKRandomUsersListModel.m */; };
+		DFFD76A61B3828650026EFD8 /* AKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76A51B3828650026EFD8 /* AKNetworkManager.m */; };
+		DFFD76A91B38287A0026EFD8 /* AKDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76A81B38287A0026EFD8 /* AKDatabaseManager.m */; };
+		DFFD76AE1B3828D00026EFD8 /* AKUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76AD1B3828D00026EFD8 /* AKUserCell.m */; };
+		DFFD76B21B383A9E0026EFD8 /* AKPopupPresentationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76B11B383A9E0026EFD8 /* AKPopupPresentationViewController.m */; };
+		F3C0B055E8C7BDC09DF9C70B /* libPods-CLTestTask.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F48A470B52EDF9A335A9383 /* libPods-CLTestTask.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1563A2976779CFC72E65ECEA /* Pods-CLTestTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLTestTask.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CLTestTask/Pods-CLTestTask.debug.xcconfig"; sourceTree = "<group>"; };
+		30CF7C2C04597DD8C53FE82D /* Pods-CLTestTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLTestTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-CLTestTask/Pods-CLTestTask.release.xcconfig"; sourceTree = "<group>"; };
+		8F48A470B52EDF9A335A9383 /* libPods-CLTestTask.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLTestTask.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFAB37321B380CBD00CFB161 /* CLTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFAB37361B380CBD00CFB161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DFAB37371B380CBD00CFB161 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -39,6 +54,29 @@
 		DFAB374E1B380CBD00CFB161 /* CLTestTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLTestTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFAB37531B380CBD00CFB161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DFAB37541B380CBD00CFB161 /* CLTestTaskTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLTestTaskTests.m; sourceTree = "<group>"; };
+		DFFD76891B381FFC0026EFD8 /* CLTestTask-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLTestTask-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		DFFD768A1B3821100026EFD8 /* AKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKConstants.h; sourceTree = "<group>"; };
+		DFFD768B1B3821100026EFD8 /* AKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKConstants.m; sourceTree = "<group>"; };
+		DFFD768E1B38223B0026EFD8 /* AKUsersListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKUsersListViewController.h; sourceTree = "<group>"; };
+		DFFD768F1B38223B0026EFD8 /* AKUsersListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKUsersListViewController.m; sourceTree = "<group>"; };
+		DFFD76911B38225D0026EFD8 /* AKUsersListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKUsersListModel.h; sourceTree = "<group>"; };
+		DFFD76921B38225D0026EFD8 /* AKUsersListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKUsersListModel.m; sourceTree = "<group>"; };
+		DFFD76981B3823820026EFD8 /* AKUserDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKUserDetailViewController.h; sourceTree = "<group>"; };
+		DFFD76991B3823820026EFD8 /* AKUserDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKUserDetailViewController.m; sourceTree = "<group>"; };
+		DFFD769B1B3823D00026EFD8 /* AKUserDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKUserDetailModel.h; sourceTree = "<group>"; };
+		DFFD769C1B3823D00026EFD8 /* AKUserDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKUserDetailModel.m; sourceTree = "<group>"; };
+		DFFD769E1B38241B0026EFD8 /* AKRandomUsersListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKRandomUsersListViewController.h; sourceTree = "<group>"; };
+		DFFD769F1B38241B0026EFD8 /* AKRandomUsersListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKRandomUsersListViewController.m; sourceTree = "<group>"; };
+		DFFD76A11B3824310026EFD8 /* AKRandomUsersListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKRandomUsersListModel.h; sourceTree = "<group>"; };
+		DFFD76A21B3824310026EFD8 /* AKRandomUsersListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKRandomUsersListModel.m; sourceTree = "<group>"; };
+		DFFD76A41B3828650026EFD8 /* AKNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKNetworkManager.h; sourceTree = "<group>"; };
+		DFFD76A51B3828650026EFD8 /* AKNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKNetworkManager.m; sourceTree = "<group>"; };
+		DFFD76A71B38287A0026EFD8 /* AKDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKDatabaseManager.h; sourceTree = "<group>"; };
+		DFFD76A81B38287A0026EFD8 /* AKDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKDatabaseManager.m; sourceTree = "<group>"; };
+		DFFD76AC1B3828D00026EFD8 /* AKUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKUserCell.h; sourceTree = "<group>"; };
+		DFFD76AD1B3828D00026EFD8 /* AKUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKUserCell.m; sourceTree = "<group>"; };
+		DFFD76B01B383A9E0026EFD8 /* AKPopupPresentationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKPopupPresentationViewController.h; sourceTree = "<group>"; };
+		DFFD76B11B383A9E0026EFD8 /* AKPopupPresentationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKPopupPresentationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3C0B055E8C7BDC09DF9C70B /* libPods-CLTestTask.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,12 +98,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		258A8134AC66EF67D314E5D7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8F48A470B52EDF9A335A9383 /* libPods-CLTestTask.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8888E3956CA01B7CF9481E64 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1563A2976779CFC72E65ECEA /* Pods-CLTestTask.debug.xcconfig */,
+				30CF7C2C04597DD8C53FE82D /* Pods-CLTestTask.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		DFAB37291B380CBD00CFB161 = {
 			isa = PBXGroup;
 			children = (
 				DFAB37341B380CBD00CFB161 /* CLTestTask */,
 				DFAB37511B380CBD00CFB161 /* CLTestTaskTests */,
 				DFAB37331B380CBD00CFB161 /* Products */,
+				8888E3956CA01B7CF9481E64 /* Pods */,
+				258A8134AC66EF67D314E5D7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,12 +138,11 @@
 		DFAB37341B380CBD00CFB161 /* CLTestTask */ = {
 			isa = PBXGroup;
 			children = (
+				DFFD768A1B3821100026EFD8 /* AKConstants.h */,
+				DFFD768B1B3821100026EFD8 /* AKConstants.m */,
+				DFFD768D1B38212D0026EFD8 /* Classes */,
 				DFAB37391B380CBD00CFB161 /* AKAppDelegate.h */,
 				DFAB373A1B380CBD00CFB161 /* AKAppDelegate.m */,
-				DFAB37421B380CBD00CFB161 /* Main.storyboard */,
-				DFAB37451B380CBD00CFB161 /* Images.xcassets */,
-				DFAB37471B380CBD00CFB161 /* LaunchScreen.xib */,
-				DFAB373C1B380CBD00CFB161 /* CLTestTask.xcdatamodeld */,
 				DFAB37351B380CBD00CFB161 /* Supporting Files */,
 			);
 			path = CLTestTask;
@@ -94,7 +151,12 @@
 		DFAB37351B380CBD00CFB161 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DFAB37451B380CBD00CFB161 /* Images.xcassets */,
+				DFAB37421B380CBD00CFB161 /* Main.storyboard */,
+				DFAB373C1B380CBD00CFB161 /* CLTestTask.xcdatamodeld */,
+				DFAB37471B380CBD00CFB161 /* LaunchScreen.xib */,
 				DFAB37361B380CBD00CFB161 /* Info.plist */,
+				DFFD76891B381FFC0026EFD8 /* CLTestTask-Prefix.pch */,
 				DFAB37371B380CBD00CFB161 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -117,6 +179,89 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DFFD768D1B38212D0026EFD8 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				DFFD76971B3822A40026EFD8 /* Database Manager */,
+				DFFD76961B38229B0026EFD8 /* Network Manager */,
+				DFFD76951B3822890026EFD8 /* Custom Table Cell */,
+				DFFD76941B3822700026EFD8 /* View Controllers */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		DFFD76941B3822700026EFD8 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DFFD76AF1B383A5F0026EFD8 /* Custom Navigation Controller */,
+				DFFD768E1B38223B0026EFD8 /* AKUsersListViewController.h */,
+				DFFD768F1B38223B0026EFD8 /* AKUsersListViewController.m */,
+				DFFD76911B38225D0026EFD8 /* AKUsersListModel.h */,
+				DFFD76921B38225D0026EFD8 /* AKUsersListModel.m */,
+				DFFD76981B3823820026EFD8 /* AKUserDetailViewController.h */,
+				DFFD76991B3823820026EFD8 /* AKUserDetailViewController.m */,
+				DFFD769B1B3823D00026EFD8 /* AKUserDetailModel.h */,
+				DFFD769C1B3823D00026EFD8 /* AKUserDetailModel.m */,
+				DFFD769E1B38241B0026EFD8 /* AKRandomUsersListViewController.h */,
+				DFFD769F1B38241B0026EFD8 /* AKRandomUsersListViewController.m */,
+				DFFD76A11B3824310026EFD8 /* AKRandomUsersListModel.h */,
+				DFFD76A21B3824310026EFD8 /* AKRandomUsersListModel.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		DFFD76951B3822890026EFD8 /* Custom Table Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DFFD76AC1B3828D00026EFD8 /* AKUserCell.h */,
+				DFFD76AD1B3828D00026EFD8 /* AKUserCell.m */,
+			);
+			name = "Custom Table Cell";
+			sourceTree = "<group>";
+		};
+		DFFD76961B38229B0026EFD8 /* Network Manager */ = {
+			isa = PBXGroup;
+			children = (
+				DFFD76A41B3828650026EFD8 /* AKNetworkManager.h */,
+				DFFD76A51B3828650026EFD8 /* AKNetworkManager.m */,
+			);
+			name = "Network Manager";
+			sourceTree = "<group>";
+		};
+		DFFD76971B3822A40026EFD8 /* Database Manager */ = {
+			isa = PBXGroup;
+			children = (
+				DFFD76AB1B3828940026EFD8 /* Mapping */,
+				DFFD76AA1B3828850026EFD8 /* Model */,
+				DFFD76A71B38287A0026EFD8 /* AKDatabaseManager.h */,
+				DFFD76A81B38287A0026EFD8 /* AKDatabaseManager.m */,
+			);
+			name = "Database Manager";
+			sourceTree = "<group>";
+		};
+		DFFD76AA1B3828850026EFD8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		DFFD76AB1B3828940026EFD8 /* Mapping */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Mapping;
+			sourceTree = "<group>";
+		};
+		DFFD76AF1B383A5F0026EFD8 /* Custom Navigation Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DFFD76B01B383A9E0026EFD8 /* AKPopupPresentationViewController.h */,
+				DFFD76B11B383A9E0026EFD8 /* AKPopupPresentationViewController.m */,
+			);
+			name = "Custom Navigation Controller";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -124,9 +269,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DFAB37581B380CBD00CFB161 /* Build configuration list for PBXNativeTarget "CLTestTask" */;
 			buildPhases = (
+				65AF00D64DAC38B723558481 /* Check Pods Manifest.lock */,
 				DFAB372E1B380CBD00CFB161 /* Sources */,
 				DFAB372F1B380CBD00CFB161 /* Frameworks */,
 				DFAB37301B380CBD00CFB161 /* Resources */,
+				279101293A997522F7214BF5 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -213,14 +360,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		279101293A997522F7214BF5 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CLTestTask/Pods-CLTestTask-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		65AF00D64DAC38B723558481 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DFAB372E1B380CBD00CFB161 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFFD76931B38225D0026EFD8 /* AKUsersListModel.m in Sources */,
+				DFFD76B21B383A9E0026EFD8 /* AKPopupPresentationViewController.m in Sources */,
 				DFAB373B1B380CBD00CFB161 /* AKAppDelegate.m in Sources */,
+				DFFD76AE1B3828D00026EFD8 /* AKUserCell.m in Sources */,
+				DFFD76A91B38287A0026EFD8 /* AKDatabaseManager.m in Sources */,
+				DFFD769A1B3823820026EFD8 /* AKUserDetailViewController.m in Sources */,
+				DFFD76A01B38241B0026EFD8 /* AKRandomUsersListViewController.m in Sources */,
+				DFFD76901B38223B0026EFD8 /* AKUsersListViewController.m in Sources */,
+				DFFD76A61B3828650026EFD8 /* AKNetworkManager.m in Sources */,
+				DFFD768C1B3821100026EFD8 /* AKConstants.m in Sources */,
+				DFFD769D1B3823D00026EFD8 /* AKUserDetailModel.m in Sources */,
 				DFAB37381B380CBD00CFB161 /* main.m in Sources */,
 				DFAB373E1B380CBD00CFB161 /* CLTestTask.xcdatamodeld in Sources */,
+				DFFD76A31B3824310026EFD8 /* AKRandomUsersListModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,8 +535,11 @@
 		};
 		DFAB37591B380CBD00CFB161 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1563A2976779CFC72E65ECEA /* Pods-CLTestTask.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CLTestTask-Prefix.pch";
 				INFOPLIST_FILE = CLTestTask/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -356,8 +550,11 @@
 		};
 		DFAB375A1B380CBD00CFB161 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30CF7C2C04597DD8C53FE82D /* Pods-CLTestTask.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CLTestTask-Prefix.pch";
 				INFOPLIST_FILE = CLTestTask/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -419,6 +616,7 @@
 				DFAB375A1B380CBD00CFB161 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DFAB375B1B380CBD00CFB161 /* Build configuration list for PBXNativeTarget "CLTestTaskTests" */ = {
 			isa = XCConfigurationList;
@@ -427,6 +625,7 @@
 				DFAB375D1B380CBD00CFB161 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
