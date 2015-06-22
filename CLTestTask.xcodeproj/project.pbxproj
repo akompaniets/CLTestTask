@@ -25,6 +25,7 @@
 		DFFD76A91B38287A0026EFD8 /* AKDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76A81B38287A0026EFD8 /* AKDatabaseManager.m */; };
 		DFFD76AE1B3828D00026EFD8 /* AKUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76AD1B3828D00026EFD8 /* AKUserCell.m */; };
 		DFFD76B21B383A9E0026EFD8 /* AKPopupPresentationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76B11B383A9E0026EFD8 /* AKPopupPresentationViewController.m */; };
+		DFFD76B51B3860960026EFD8 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = DFFD76B71B3860960026EFD8 /* Localized.strings */; };
 		F3C0B055E8C7BDC09DF9C70B /* libPods-CLTestTask.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F48A470B52EDF9A335A9383 /* libPods-CLTestTask.a */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		DFFD76AD1B3828D00026EFD8 /* AKUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKUserCell.m; sourceTree = "<group>"; };
 		DFFD76B01B383A9E0026EFD8 /* AKPopupPresentationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKPopupPresentationViewController.h; sourceTree = "<group>"; };
 		DFFD76B11B383A9E0026EFD8 /* AKPopupPresentationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKPopupPresentationViewController.m; sourceTree = "<group>"; };
+		DFFD76B61B3860960026EFD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localized.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 			children = (
 				DFAB37451B380CBD00CFB161 /* Images.xcassets */,
 				DFAB37421B380CBD00CFB161 /* Main.storyboard */,
+				DFFD76B71B3860960026EFD8 /* Localized.strings */,
 				DFAB373C1B380CBD00CFB161 /* CLTestTask.xcdatamodeld */,
 				DFAB37471B380CBD00CFB161 /* LaunchScreen.xib */,
 				DFAB37361B380CBD00CFB161 /* Info.plist */,
@@ -345,6 +348,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFFD76B51B3860960026EFD8 /* Localized.strings in Resources */,
 				DFAB37441B380CBD00CFB161 /* Main.storyboard in Resources */,
 				DFAB37491B380CBD00CFB161 /* LaunchScreen.xib in Resources */,
 				DFAB37461B380CBD00CFB161 /* Images.xcassets in Resources */,
@@ -448,6 +452,14 @@
 				DFAB37481B380CBD00CFB161 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		DFFD76B71B3860960026EFD8 /* Localized.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFFD76B61B3860960026EFD8 /* Base */,
+			);
+			name = Localized.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
