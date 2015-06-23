@@ -10,4 +10,6 @@
 
 @implementation AKConstants
 
+NSString *URL = @"http://api.randomuser.me/?results=30";
+
 @end

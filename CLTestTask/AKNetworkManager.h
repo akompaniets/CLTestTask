@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AFNetworking/AFURLSessionManager.h>
 
-@interface AKNetworkManager : NSObject
+@interface AKNetworkManager : AFURLSessionManager
+
++ (instancetype)sharedManager;
+- (void)fetchRandomUsersWithCallback:(void(^)(id usersData, NSError *error))callback;
+
 
 @end

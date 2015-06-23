@@ -10,4 +10,6 @@
 
 @interface AKRandomUsersListViewController : UIViewController
 
++ (NSString *)controllerID;
+
 @end

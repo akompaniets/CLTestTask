@@ -10,4 +10,7 @@
 
 @interface AKUserCell : UITableViewCell
 
++ (NSString *)cellIdentifier;
+- (void)setupCellwithPhotoPath:(NSString *)path title:(NSString *)title;
+
 @end

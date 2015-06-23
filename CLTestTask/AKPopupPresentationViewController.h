@@ -10,4 +10,7 @@
 
 @interface AKPopupPresentationViewController : UIViewController
 
+- (void)showPopupViewController:(UIViewController *)viewController;
+- (void)hidePopupViewController;
+
 @end

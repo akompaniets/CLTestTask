@@ -8,7 +8,13 @@
 
 #import "AKPopupPresentationViewController.h"
 
+static CGFloat duration = 0.3f;
+
 @interface AKPopupPresentationViewController ()
+
+@property (strong, nonatomic) UIViewController *popupViewController;
+@property (assign, nonatomic) CGFloat height;
+@property (strong, nonatomic) NSLayoutConstraint *verticalPosConstraint;
 
 @end
 
@@ -24,14 +30,56 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)showPopupViewController:(UIViewController *)viewController {
+    
+    self.popupViewController = viewController;
+    self.popupViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addChildViewController:self.popupViewController];
+    [self.view addSubview:self.popupViewController.view];
+     self.height = self.view.bounds.size.height;
+    NSDictionary *viewsDict = @{@"controller" : self.popupViewController.view};
+    NSDictionary *metrics = @{@"width" : @(self.view.bounds.size.width),
+                              @"heigth" : @(self.height)};
+   
+    NSArray *constraintsH = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[controller(width)]" options:0 metrics:metrics views:viewsDict];
+    NSArray *constraintsW = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[controller(heigth)]" options:0 metrics:metrics views:viewsDict];
+    NSLayoutConstraint *constraintPOSH = [NSLayoutConstraint constraintWithItem:self.popupViewController.view
+                                                                      attribute:NSLayoutAttributeCenterX
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self.view
+                                                                      attribute:NSLayoutAttributeCenterX
+                                                                     multiplier:1
+                                                                       constant:0];
+    self.verticalPosConstraint = [NSLayoutConstraint constraintWithItem:self.popupViewController.view
+                                                              attribute:NSLayoutAttributeBottom
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.view
+                                                              attribute:NSLayoutAttributeBottom
+                                                             multiplier:1
+                                                               constant:-self.height];
+    [self.view addConstraints:constraintsH];
+    [self.view addConstraints:constraintsW];
+    [self.view addConstraint:constraintPOSH];
+    [self.view addConstraint:self.verticalPosConstraint];
+    [self.view layoutIfNeeded];
+    
+    self.verticalPosConstraint.constant = 0;
+    [UIView animateWithDuration:duration animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
-*/
+
+- (void)hidePopupViewController {
+    self.verticalPosConstraint.constant = -self.height;
+    [UIView animateWithDuration:duration animations:^{
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [self.popupViewController.view removeFromSuperview];
+        [self.popupViewController removeFromParentViewController];
+        self.popupViewController = nil;
+        self.verticalPosConstraint = nil;
+    }];
+    
+}
 
 @end

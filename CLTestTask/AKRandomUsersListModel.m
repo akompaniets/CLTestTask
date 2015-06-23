@@ -7,7 +7,17 @@
 //
 
 #import "AKRandomUsersListModel.h"
+#import "AKNetworkManager.h"
 
 @implementation AKRandomUsersListModel
+
+- (void)fetchNewUserListWithCallback:(void(^)(id response, NSError *error))callback {
+    AKNetworkManager *manager = [AKNetworkManager new];
+    
+    [manager fetchRandomUsersWithCallback:^(id usersData, NSError *error) {
+        callback(usersData, error);
+    }];
+    
+}
 
 @end

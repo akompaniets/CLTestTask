@@ -10,4 +10,6 @@
 
 @interface AKConstants : NSObject
 
+extern NSString *URL;
+
 @end

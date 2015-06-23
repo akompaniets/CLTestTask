@@ -10,4 +10,6 @@
 
 @interface AKRandomUsersListModel : NSObject
 
+- (void)fetchNewUserListWithCallback:(void(^)(id response, NSError *error))callback;
+
 @end

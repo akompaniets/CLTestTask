@@ -7,16 +7,35 @@
 //
 
 #import "AKRandomUsersListViewController.h"
+#import "AKPopupPresentationViewController.h"
+#import "AKAppDelegate.h"
+#import "AKUserCell.h"
+#import "AKRandomUsersListModel.h"
 
-@interface AKRandomUsersListViewController ()
+@interface AKRandomUsersListViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) AKRandomUsersListModel *model;
+@property (copy, nonatomic) NSMutableArray *users;
 
 @end
 
 @implementation AKRandomUsersListViewController
 
++ (NSString *)controllerID {
+    return NSStringFromClass([self class]);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.model = [AKRandomUsersListModel new];
+    __block typeof(self) weakSelf = self;
+    [self.model fetchNewUserListWithCallback:^(id response, NSError *error) {
+        if (error) {
+            NSLog(@"Something wrong!");
+        } else {
+            weakSelf.users = [response objectForKey:@"results"];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +43,28 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)dismissController:(UIBarButtonItem *)sender {
+    [(AKPopupPresentationViewController *)([[AKAppDelegate sharedDelegate] window].rootViewController) hidePopupViewController];
 }
-*/
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.users count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *const cellID = [AKUserCell cellIdentifier];
+    AKUserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[AKUserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    }
+//    NSString *logoPath = [
+    
+    return cell;
+}
+
+
+#pragma mark - UITableViewDelegate
 
 @end
