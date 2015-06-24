@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface AKAlertView : NSObject
+@interface AKAlertView : UIView
 
 + (void)showAlertwithTitle:(NSString *)title message:(NSString *)message delegate:(id<UIAlertViewDelegate>)delegate;
-
++ (void)showAlertInView:(UIView *)view withTitle:(NSString *)title message:(NSString *)message severity:(AKAlertViewSeverity)severity;
 @end

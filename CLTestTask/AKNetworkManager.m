@@ -8,7 +8,7 @@
 
 #import "AKNetworkManager.h"
 
-@interface AKNetworkManager () <NSURLSessionTaskDelegate>
+@interface AKNetworkManager ()
 
 @end
 
@@ -30,6 +30,7 @@
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:URL]];
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+    
         if (error) {
             NSLog(@"Error: %@", error);
             callback(nil, error);
@@ -39,12 +40,6 @@
         }
     }];
     [dataTask resume];
-}
-
-#pragma mark - NSURLSessionTaskDelegate
-
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
-    NSLog(@"Session - %@ did finish task: %@", session, task);
 }
 
 @end

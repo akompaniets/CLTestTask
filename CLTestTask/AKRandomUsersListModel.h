@@ -10,6 +10,7 @@
 
 @interface AKRandomUsersListModel : NSObject
 
-- (void)fetchNewUserListWithCallback:(void(^)(id response, NSError *error))callback;
-
+- (void)fetchNewUserListWithCallback:(void(^)(NSArray *newUsers, NSError *error))callback;
+- (void)saveSelectedUsers:(NSArray *)selectedUsers withCompletionHandler:(void(^)(NSError *error))completionHandler;
+- (BOOL)saveSelectedUsers:(NSArray *)selectedUsers;
 @end

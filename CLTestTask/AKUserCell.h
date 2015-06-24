@@ -11,6 +11,6 @@
 @interface AKUserCell : UITableViewCell
 
 + (NSString *)cellIdentifier;
-- (void)setupCellwithPhotoPath:(NSString *)path title:(NSString *)title;
+- (void)setupCellForIndexPath:(NSIndexPath *)indexPath withPhotoPath:(NSString *)path title:(NSString *)title;
 
 @end

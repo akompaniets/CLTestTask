@@ -17,6 +17,7 @@
 		DFC3A9731B39555A007DB473 /* AKAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC3A9721B39555A007DB473 /* AKAlertView.m */; };
 		DFC3A9771B3973C2007DB473 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DFC3A9791B3973C2007DB473 /* Localizable.strings */; };
 		DFC3A97D1B399E30007DB473 /* AKFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC3A97C1B399E30007DB473 /* AKFriend.m */; };
+		DFE6652B1B3AF65600D8238B /* AKMappingProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = DFE6652A1B3AF65600D8238B /* AKMappingProvider.m */; };
 		DFFD768C1B3821100026EFD8 /* AKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD768B1B3821100026EFD8 /* AKConstants.m */; };
 		DFFD76901B38223B0026EFD8 /* AKUsersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD768F1B38223B0026EFD8 /* AKUsersListViewController.m */; };
 		DFFD76931B38225D0026EFD8 /* AKUsersListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76921B38225D0026EFD8 /* AKUsersListModel.m */; };
@@ -63,6 +64,8 @@
 		DFC3A97A1B3973D4007DB473 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DFC3A97B1B399E30007DB473 /* AKFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFriend.h; sourceTree = "<group>"; };
 		DFC3A97C1B399E30007DB473 /* AKFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFriend.m; sourceTree = "<group>"; };
+		DFE665291B3AF65600D8238B /* AKMappingProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKMappingProvider.h; sourceTree = "<group>"; };
+		DFE6652A1B3AF65600D8238B /* AKMappingProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKMappingProvider.m; sourceTree = "<group>"; };
 		DFFD76891B381FFC0026EFD8 /* CLTestTask-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLTestTask-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		DFFD768A1B3821100026EFD8 /* AKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKConstants.h; sourceTree = "<group>"; };
 		DFFD768B1B3821100026EFD8 /* AKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKConstants.m; sourceTree = "<group>"; };
@@ -251,7 +254,7 @@
 		DFFD76971B3822A40026EFD8 /* Database Manager */ = {
 			isa = PBXGroup;
 			children = (
-				DFFD76AB1B3828940026EFD8 /* Mapping */,
+				DFFD76AB1B3828940026EFD8 /* Mapping Provider */,
 				DFFD76AA1B3828850026EFD8 /* Model */,
 				DFFD76A71B38287A0026EFD8 /* AKDatabaseManager.h */,
 				DFFD76A81B38287A0026EFD8 /* AKDatabaseManager.m */,
@@ -268,11 +271,13 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		DFFD76AB1B3828940026EFD8 /* Mapping */ = {
+		DFFD76AB1B3828940026EFD8 /* Mapping Provider */ = {
 			isa = PBXGroup;
 			children = (
+				DFE665291B3AF65600D8238B /* AKMappingProvider.h */,
+				DFE6652A1B3AF65600D8238B /* AKMappingProvider.m */,
 			);
-			name = Mapping;
+			name = "Mapping Provider";
 			sourceTree = "<group>";
 		};
 		DFFD76AF1B383A5F0026EFD8 /* Custom Navigation Controller */ = {
@@ -421,6 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFE6652B1B3AF65600D8238B /* AKMappingProvider.m in Sources */,
 				DFFD76931B38225D0026EFD8 /* AKUsersListModel.m in Sources */,
 				DFFD76B21B383A9E0026EFD8 /* AKPopupPresentationViewController.m in Sources */,
 				DFAB373B1B380CBD00CFB161 /* AKAppDelegate.m in Sources */,
@@ -572,12 +578,14 @@
 			baseConfigurationReference = 1563A2976779CFC72E65ECEA /* Pods-CLTestTask.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Kompaniets (MT836QR9K3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CLTestTask-Prefix.pch";
 				INFOPLIST_FILE = CLTestTask/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5a289751-3a56-4cbc-b284-69f823b0cbf7";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -587,12 +595,14 @@
 			baseConfigurationReference = 30CF7C2C04597DD8C53FE82D /* Pods-CLTestTask.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Kompaniets (MT836QR9K3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CLTestTask-Prefix.pch";
 				INFOPLIST_FILE = CLTestTask/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5a289751-3a56-4cbc-b284-69f823b0cbf7";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

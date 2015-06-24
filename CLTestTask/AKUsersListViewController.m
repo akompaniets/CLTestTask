@@ -13,6 +13,7 @@
 #import "AKAppDelegate.h"
 #import "AKPopupPresentationViewController.h"
 #import "AKRandomUsersListViewController.h"
+#import "AKAlertView.h"
 
 @interface AKUsersListViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
@@ -36,6 +37,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+//    [AKAlertView showAlertInView:self.view withTitle:@"Test Test Test Test" message:@"flskdjf sdfsj fsfsljf sdfsdf" severity:AKAlertViewSeverityWarning];
+//    self.tableView.hidden = YES;
 }
 
 #pragma mark - Actions
@@ -99,17 +106,19 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"UserData"
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"AKFriend"
                                               inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
     [fetchRequest setFetchBatchSize:15];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userID"
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"firstName"
                                                                    ascending:YES];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"friend != NO"];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
+    [fetchRequest setPredicate:predicate];
     
     NSFetchedResultsController *aFetchedResultsController =
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest

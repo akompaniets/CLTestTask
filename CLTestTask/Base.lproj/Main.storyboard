@@ -67,8 +67,8 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sf1-LT-eNZ">
                                                     <rect key="frame" x="88" y="5" width="492" height="53"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -100,9 +100,14 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Title" id="iGT-JB-bi6">
-                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="3xW-ae-pjZ">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Tt1-xB-xcA">
                                             <connections>
-                                                <action selector="dismissController:" destination="cxw-pP-E2c" id="ztJ-JO-dj4"/>
+                                                <action selector="dismissController:" destination="cxw-pP-E2c" id="6b2-ao-Ko7"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="3xW-ae-pjZ">
+                                            <connections>
+                                                <action selector="addUsersToFriendList:" destination="cxw-pP-E2c" id="GnP-el-KiF"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -131,6 +136,9 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="QAQ-WL-hSv" id="F2g-oG-DBq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="apo-gK-FeX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -167,7 +175,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ox-mw-4ud">
                                                     <rect key="frame" x="88" y="5" width="492" height="53"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>

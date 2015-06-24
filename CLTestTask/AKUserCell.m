@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *userLogo;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
+@property (strong, nonatomic) NSCache *imageCache;
 
 @end
 
@@ -21,25 +22,34 @@
     return NSStringFromClass([self class]);
 }
 
-- (void)awakeFromNib {
-    // Initialization code
+-(NSCache *)imageCache {
+    if (!_imageCache) {
+        _imageCache = [NSCache new];
+    }
+    return _imageCache;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
-- (void)setupCellwithPhotoPath:(NSString *)path title:(NSString *)title {
+- (void)setupCellForIndexPath:(NSIndexPath *)indexPath withPhotoPath:(NSString *)path title:(NSString *)title {
     self.userName.text = title;
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.userLogo.image = [UIImage imageWithData:imageData];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    NSString *imageKey = [NSString stringWithFormat:@"cell%ld", indexPath.row];
+    UIImage *cachedImage = [self.imageCache objectForKey:imageKey];
+    if (cachedImage) {
+        self.userLogo.image = cachedImage;
+    } else {
+        self.userLogo.image = [UIImage imageNamed:@"didntLoad"];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
+            UIImage *image = [UIImage imageWithData:imageData];
+            if (image) {
+                [self.imageCache setObject:image forKey:imageKey];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.userLogo.image = image;
+                });
+            }
+            
         });
-    });
+    }
 }
 
 @end

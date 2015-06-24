@@ -7,6 +7,9 @@
 //
 
 #import "AKDatabaseManager.h"
+#import "AKMappingProvider.h"
+#import "AKFriend.h"
+#import <FEMManagedObjectDeserializer.h>
 
 
 @implementation AKDatabaseManager
@@ -16,6 +19,16 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
++ (instancetype)sharedManager {
+    static AKDatabaseManager *manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        manager = [AKDatabaseManager new];
+    });
+    
+    return manager;
+}
 
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "com.akompaniets.CLTestTask" in the application's documents directory.
@@ -74,6 +87,14 @@
     _managedObjectContext = [[NSManagedObjectContext alloc] init];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     return _managedObjectContext;
+}
+
+- (void)saveUsers:(NSArray *)users withCompletionHandler:(void(^)(NSError *error))completionHandler {
+    for (NSDictionary *currentUser in users) {
+        AKFriend *friend = [FEMManagedObjectDeserializer deserializeObjectExternalRepresentation:currentUser
+                                                                                    usingMapping:[AKMappingProvider friendMapping]
+                                                                                         context:self.managedObjectContext];
+    }
 }
 
 #pragma mark - Core Data Saving support
