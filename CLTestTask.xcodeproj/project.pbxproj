@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DFAA34FC1B3C3AE1004BC7CD /* AKFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAA34FB1B3C3AE1004BC7CD /* AKFriendCell.m */; };
+		DFAA34FF1B3C41BC004BC7CD /* AKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAA34FE1B3C41BC004BC7CD /* AKUser.m */; };
+		DFAA35021B3C4FC6004BC7CD /* AKFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAA35011B3C4FC6004BC7CD /* AKFriend.m */; };
 		DFAB37381B380CBD00CFB161 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAB37371B380CBD00CFB161 /* main.m */; };
 		DFAB373B1B380CBD00CFB161 /* AKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAB373A1B380CBD00CFB161 /* AKAppDelegate.m */; };
 		DFAB373E1B380CBD00CFB161 /* CLTestTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DFAB373C1B380CBD00CFB161 /* CLTestTask.xcdatamodeld */; };
@@ -16,13 +19,12 @@
 		DFAB37551B380CBD00CFB161 /* CLTestTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAB37541B380CBD00CFB161 /* CLTestTaskTests.m */; };
 		DFC3A9731B39555A007DB473 /* AKAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC3A9721B39555A007DB473 /* AKAlertView.m */; };
 		DFC3A9771B3973C2007DB473 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DFC3A9791B3973C2007DB473 /* Localizable.strings */; };
-		DFC3A97D1B399E30007DB473 /* AKFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC3A97C1B399E30007DB473 /* AKFriend.m */; };
 		DFE6652B1B3AF65600D8238B /* AKMappingProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = DFE6652A1B3AF65600D8238B /* AKMappingProvider.m */; };
 		DFFD768C1B3821100026EFD8 /* AKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD768B1B3821100026EFD8 /* AKConstants.m */; };
-		DFFD76901B38223B0026EFD8 /* AKUsersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD768F1B38223B0026EFD8 /* AKUsersListViewController.m */; };
-		DFFD76931B38225D0026EFD8 /* AKUsersListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76921B38225D0026EFD8 /* AKUsersListModel.m */; };
-		DFFD769A1B3823820026EFD8 /* AKUserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76991B3823820026EFD8 /* AKUserDetailViewController.m */; };
-		DFFD769D1B3823D00026EFD8 /* AKUserDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD769C1B3823D00026EFD8 /* AKUserDetailModel.m */; };
+		DFFD76901B38223B0026EFD8 /* AKFriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD768F1B38223B0026EFD8 /* AKFriendsListViewController.m */; };
+		DFFD76931B38225D0026EFD8 /* AKFriendsListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76921B38225D0026EFD8 /* AKFriendsListModel.m */; };
+		DFFD769A1B3823820026EFD8 /* AKFriendDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76991B3823820026EFD8 /* AKFriendDetailViewController.m */; };
+		DFFD769D1B3823D00026EFD8 /* AKFriendDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD769C1B3823D00026EFD8 /* AKFriendDetailModel.m */; };
 		DFFD76A01B38241B0026EFD8 /* AKRandomUsersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD769F1B38241B0026EFD8 /* AKRandomUsersListViewController.m */; };
 		DFFD76A31B3824310026EFD8 /* AKRandomUsersListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76A21B3824310026EFD8 /* AKRandomUsersListModel.m */; };
 		DFFD76A61B3828650026EFD8 /* AKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD76A51B3828650026EFD8 /* AKNetworkManager.m */; };
@@ -46,6 +48,12 @@
 		1563A2976779CFC72E65ECEA /* Pods-CLTestTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLTestTask.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CLTestTask/Pods-CLTestTask.debug.xcconfig"; sourceTree = "<group>"; };
 		30CF7C2C04597DD8C53FE82D /* Pods-CLTestTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLTestTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-CLTestTask/Pods-CLTestTask.release.xcconfig"; sourceTree = "<group>"; };
 		8F48A470B52EDF9A335A9383 /* libPods-CLTestTask.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLTestTask.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFAA34FA1B3C3AE1004BC7CD /* AKFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFriendCell.h; sourceTree = "<group>"; };
+		DFAA34FB1B3C3AE1004BC7CD /* AKFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFriendCell.m; sourceTree = "<group>"; };
+		DFAA34FD1B3C41BC004BC7CD /* AKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKUser.h; sourceTree = "<group>"; };
+		DFAA34FE1B3C41BC004BC7CD /* AKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKUser.m; sourceTree = "<group>"; };
+		DFAA35001B3C4FC6004BC7CD /* AKFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFriend.h; sourceTree = "<group>"; };
+		DFAA35011B3C4FC6004BC7CD /* AKFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFriend.m; sourceTree = "<group>"; };
 		DFAB37321B380CBD00CFB161 /* CLTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFAB37361B380CBD00CFB161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DFAB37371B380CBD00CFB161 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -62,21 +70,19 @@
 		DFC3A9721B39555A007DB473 /* AKAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKAlertView.m; sourceTree = "<group>"; };
 		DFC3A9781B3973C2007DB473 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DFC3A97A1B3973D4007DB473 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DFC3A97B1B399E30007DB473 /* AKFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFriend.h; sourceTree = "<group>"; };
-		DFC3A97C1B399E30007DB473 /* AKFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFriend.m; sourceTree = "<group>"; };
 		DFE665291B3AF65600D8238B /* AKMappingProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKMappingProvider.h; sourceTree = "<group>"; };
 		DFE6652A1B3AF65600D8238B /* AKMappingProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKMappingProvider.m; sourceTree = "<group>"; };
 		DFFD76891B381FFC0026EFD8 /* CLTestTask-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLTestTask-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		DFFD768A1B3821100026EFD8 /* AKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKConstants.h; sourceTree = "<group>"; };
 		DFFD768B1B3821100026EFD8 /* AKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKConstants.m; sourceTree = "<group>"; };
-		DFFD768E1B38223B0026EFD8 /* AKUsersListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKUsersListViewController.h; sourceTree = "<group>"; };
-		DFFD768F1B38223B0026EFD8 /* AKUsersListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKUsersListViewController.m; sourceTree = "<group>"; };
-		DFFD76911B38225D0026EFD8 /* AKUsersListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKUsersListModel.h; sourceTree = "<group>"; };
-		DFFD76921B38225D0026EFD8 /* AKUsersListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKUsersListModel.m; sourceTree = "<group>"; };
-		DFFD76981B3823820026EFD8 /* AKUserDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKUserDetailViewController.h; sourceTree = "<group>"; };
-		DFFD76991B3823820026EFD8 /* AKUserDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKUserDetailViewController.m; sourceTree = "<group>"; };
-		DFFD769B1B3823D00026EFD8 /* AKUserDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKUserDetailModel.h; sourceTree = "<group>"; };
-		DFFD769C1B3823D00026EFD8 /* AKUserDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKUserDetailModel.m; sourceTree = "<group>"; };
+		DFFD768E1B38223B0026EFD8 /* AKFriendsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFriendsListViewController.h; sourceTree = "<group>"; };
+		DFFD768F1B38223B0026EFD8 /* AKFriendsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFriendsListViewController.m; sourceTree = "<group>"; };
+		DFFD76911B38225D0026EFD8 /* AKFriendsListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFriendsListModel.h; sourceTree = "<group>"; };
+		DFFD76921B38225D0026EFD8 /* AKFriendsListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFriendsListModel.m; sourceTree = "<group>"; };
+		DFFD76981B3823820026EFD8 /* AKFriendDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFriendDetailViewController.h; sourceTree = "<group>"; };
+		DFFD76991B3823820026EFD8 /* AKFriendDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFriendDetailViewController.m; sourceTree = "<group>"; };
+		DFFD769B1B3823D00026EFD8 /* AKFriendDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFriendDetailModel.h; sourceTree = "<group>"; };
+		DFFD769C1B3823D00026EFD8 /* AKFriendDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFriendDetailModel.m; sourceTree = "<group>"; };
 		DFFD769E1B38241B0026EFD8 /* AKRandomUsersListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKRandomUsersListViewController.h; sourceTree = "<group>"; };
 		DFFD769F1B38241B0026EFD8 /* AKRandomUsersListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKRandomUsersListViewController.m; sourceTree = "<group>"; };
 		DFFD76A11B3824310026EFD8 /* AKRandomUsersListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKRandomUsersListModel.h; sourceTree = "<group>"; };
@@ -197,6 +203,8 @@
 			children = (
 				DFC3A9711B39555A007DB473 /* AKAlertView.h */,
 				DFC3A9721B39555A007DB473 /* AKAlertView.m */,
+				DFAA34FD1B3C41BC004BC7CD /* AKUser.h */,
+				DFAA34FE1B3C41BC004BC7CD /* AKUser.m */,
 			);
 			name = "Support Classes";
 			sourceTree = "<group>";
@@ -205,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				DFC3A9701B395539007DB473 /* Support Classes */,
+				DFFD76AB1B3828940026EFD8 /* Mapping Provider */,
 				DFFD76971B3822A40026EFD8 /* Database Manager */,
 				DFFD76961B38229B0026EFD8 /* Network Manager */,
 				DFFD76951B3822890026EFD8 /* Custom Table Cell */,
@@ -217,14 +226,14 @@
 			isa = PBXGroup;
 			children = (
 				DFFD76AF1B383A5F0026EFD8 /* Custom Navigation Controller */,
-				DFFD768E1B38223B0026EFD8 /* AKUsersListViewController.h */,
-				DFFD768F1B38223B0026EFD8 /* AKUsersListViewController.m */,
-				DFFD76911B38225D0026EFD8 /* AKUsersListModel.h */,
-				DFFD76921B38225D0026EFD8 /* AKUsersListModel.m */,
-				DFFD76981B3823820026EFD8 /* AKUserDetailViewController.h */,
-				DFFD76991B3823820026EFD8 /* AKUserDetailViewController.m */,
-				DFFD769B1B3823D00026EFD8 /* AKUserDetailModel.h */,
-				DFFD769C1B3823D00026EFD8 /* AKUserDetailModel.m */,
+				DFFD768E1B38223B0026EFD8 /* AKFriendsListViewController.h */,
+				DFFD768F1B38223B0026EFD8 /* AKFriendsListViewController.m */,
+				DFFD76911B38225D0026EFD8 /* AKFriendsListModel.h */,
+				DFFD76921B38225D0026EFD8 /* AKFriendsListModel.m */,
+				DFFD76981B3823820026EFD8 /* AKFriendDetailViewController.h */,
+				DFFD76991B3823820026EFD8 /* AKFriendDetailViewController.m */,
+				DFFD769B1B3823D00026EFD8 /* AKFriendDetailModel.h */,
+				DFFD769C1B3823D00026EFD8 /* AKFriendDetailModel.m */,
 				DFFD769E1B38241B0026EFD8 /* AKRandomUsersListViewController.h */,
 				DFFD769F1B38241B0026EFD8 /* AKRandomUsersListViewController.m */,
 				DFFD76A11B3824310026EFD8 /* AKRandomUsersListModel.h */,
@@ -238,6 +247,8 @@
 			children = (
 				DFFD76AC1B3828D00026EFD8 /* AKUserCell.h */,
 				DFFD76AD1B3828D00026EFD8 /* AKUserCell.m */,
+				DFAA34FA1B3C3AE1004BC7CD /* AKFriendCell.h */,
+				DFAA34FB1B3C3AE1004BC7CD /* AKFriendCell.m */,
 			);
 			name = "Custom Table Cell";
 			sourceTree = "<group>";
@@ -254,7 +265,6 @@
 		DFFD76971B3822A40026EFD8 /* Database Manager */ = {
 			isa = PBXGroup;
 			children = (
-				DFFD76AB1B3828940026EFD8 /* Mapping Provider */,
 				DFFD76AA1B3828850026EFD8 /* Model */,
 				DFFD76A71B38287A0026EFD8 /* AKDatabaseManager.h */,
 				DFFD76A81B38287A0026EFD8 /* AKDatabaseManager.m */,
@@ -265,8 +275,8 @@
 		DFFD76AA1B3828850026EFD8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DFC3A97B1B399E30007DB473 /* AKFriend.h */,
-				DFC3A97C1B399E30007DB473 /* AKFriend.m */,
+				DFAA35001B3C4FC6004BC7CD /* AKFriend.h */,
+				DFAA35011B3C4FC6004BC7CD /* AKFriend.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -427,19 +437,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFE6652B1B3AF65600D8238B /* AKMappingProvider.m in Sources */,
-				DFFD76931B38225D0026EFD8 /* AKUsersListModel.m in Sources */,
+				DFFD76931B38225D0026EFD8 /* AKFriendsListModel.m in Sources */,
 				DFFD76B21B383A9E0026EFD8 /* AKPopupPresentationViewController.m in Sources */,
 				DFAB373B1B380CBD00CFB161 /* AKAppDelegate.m in Sources */,
 				DFFD76AE1B3828D00026EFD8 /* AKUserCell.m in Sources */,
+				DFAA34FC1B3C3AE1004BC7CD /* AKFriendCell.m in Sources */,
 				DFFD76A91B38287A0026EFD8 /* AKDatabaseManager.m in Sources */,
-				DFFD769A1B3823820026EFD8 /* AKUserDetailViewController.m in Sources */,
+				DFFD769A1B3823820026EFD8 /* AKFriendDetailViewController.m in Sources */,
 				DFC3A9731B39555A007DB473 /* AKAlertView.m in Sources */,
+				DFAA34FF1B3C41BC004BC7CD /* AKUser.m in Sources */,
 				DFFD76A01B38241B0026EFD8 /* AKRandomUsersListViewController.m in Sources */,
-				DFFD76901B38223B0026EFD8 /* AKUsersListViewController.m in Sources */,
-				DFC3A97D1B399E30007DB473 /* AKFriend.m in Sources */,
+				DFAA35021B3C4FC6004BC7CD /* AKFriend.m in Sources */,
+				DFFD76901B38223B0026EFD8 /* AKFriendsListViewController.m in Sources */,
 				DFFD76A61B3828650026EFD8 /* AKNetworkManager.m in Sources */,
 				DFFD768C1B3821100026EFD8 /* AKConstants.m in Sources */,
-				DFFD769D1B3823D00026EFD8 /* AKUserDetailModel.m in Sources */,
+				DFFD769D1B3823D00026EFD8 /* AKFriendDetailModel.m in Sources */,
 				DFAB37381B380CBD00CFB161 /* main.m in Sources */,
 				DFAB373E1B380CBD00CFB161 /* CLTestTask.xcdatamodeld in Sources */,
 				DFFD76A31B3824310026EFD8 /* AKRandomUsersListModel.m in Sources */,

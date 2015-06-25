@@ -94,7 +94,12 @@
         AKFriend *friend = [FEMManagedObjectDeserializer deserializeObjectExternalRepresentation:currentUser
                                                                                     usingMapping:[AKMappingProvider friendMapping]
                                                                                          context:self.managedObjectContext];
+//        friend = [FEMManagedObjectDeserializer fillObject:friend fromExternalRepresentation:currentUser usingMapping:[AKMappingProvider friendMapping]];
+        friend.friend = @(YES);
     }
+    NSError *error;
+    [self.managedObjectContext save:&error];
+    completionHandler(error);
 }
 
 #pragma mark - Core Data Saving support

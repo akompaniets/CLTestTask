@@ -1,5 +1,5 @@
 //
-//  AKUserDetailViewController.h
+//  AKUsersListViewController.h
 //  CLTestTask
 //
 //  Created by Mobindustry on 6/22/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AKUserDetailViewController : UIViewController
+@interface AKFriendsListViewController : UIViewController
 
 @end

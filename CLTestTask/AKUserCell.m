@@ -7,11 +7,10 @@
 //
 
 #import "AKUserCell.h"
+#import "AKUser.h"
 
 @interface AKUserCell()
 
-@property (weak, nonatomic) IBOutlet UIImageView *userLogo;
-@property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (strong, nonatomic) NSCache *imageCache;
 
 @end
@@ -29,27 +28,27 @@
     return _imageCache;
 }
 
-- (void)setupCellForIndexPath:(NSIndexPath *)indexPath withPhotoPath:(NSString *)path title:(NSString *)title {
-    self.userName.text = title;
+- (void)configureCellAtIndexPath:(NSIndexPath *)indexPath forUser:(AKUser *)user {
+    self.userName.text = [NSString stringWithFormat:@"%@.%@ %@", user.title, user.firstName, user.lastName];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     NSString *imageKey = [NSString stringWithFormat:@"cell%ld", indexPath.row];
     UIImage *cachedImage = [self.imageCache objectForKey:imageKey];
     if (cachedImage) {
-        self.userLogo.image = cachedImage;
+        self.userImage.image = cachedImage;
     } else {
-        self.userLogo.image = [UIImage imageNamed:@"didntLoad"];
+        self.userImage.image = [UIImage imageNamed:@"didntLoad"];
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:user.thumbnailUrl]];
             UIImage *image = [UIImage imageWithData:imageData];
             if (image) {
                 [self.imageCache setObject:image forKey:imageKey];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    self.userLogo.image = image;
+                    self.userImage.image = image;
                 });
             }
-            
         });
     }
+    
 }
 
 @end

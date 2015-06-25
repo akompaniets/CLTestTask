@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class AKUser;
 @interface AKUserCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *userImage;
+@property (weak, nonatomic) IBOutlet UILabel *userName;
+
 + (NSString *)cellIdentifier;
-- (void)setupCellForIndexPath:(NSIndexPath *)indexPath withPhotoPath:(NSString *)path title:(NSString *)title;
+- (void)configureCellAtIndexPath:(NSIndexPath *)indexPath forUser:(AKUser *)user;
 
 @end

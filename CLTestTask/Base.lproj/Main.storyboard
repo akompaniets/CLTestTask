@@ -83,8 +83,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="userLogo" destination="RnL-ae-BD5" id="XcI-ms-j7b"/>
-                                            <outlet property="userName" destination="sf1-LT-eNZ" id="Tk1-9m-aMY"/>
+                                            <outlet property="userImage" destination="RnL-ae-BD5" id="kjf-c7-Vga"/>
+                                            <outlet property="userName" destination="sf1-LT-eNZ" id="b42-y5-lyi"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -144,10 +144,10 @@
             </objects>
             <point key="canvasLocation" x="2150" y="-449"/>
         </scene>
-        <!--Users List View Controller-->
+        <!--Friends List View Controller-->
         <scene sceneID="LKO-51-b2v">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Mge-mS-7bj" customClass="AKUsersListViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Mge-mS-7bj" customClass="AKFriendsListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f13-pB-eBm"/>
                         <viewControllerLayoutGuide type="bottom" id="a8Y-oW-cDI"/>
@@ -160,7 +160,7 @@
                                 <rect key="frame" x="0.0" y="44" width="600" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AKUserCell" rowHeight="64" id="WxA-3f-NCp" customClass="AKUserCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AKFriendCell" rowHeight="64" id="WxA-3f-NCp" userLabel="AKFriendCell" customClass="AKFriendCell">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WxA-3f-NCp" id="p3l-1y-eis">
@@ -190,8 +190,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="userLogo" destination="QgH-m0-eca" id="P7J-rx-aIM"/>
-                                            <outlet property="userName" destination="9Ox-mw-4ud" id="iVG-M1-ZSf"/>
+                                            <outlet property="userImage" destination="QgH-m0-eca" id="zjM-E1-Cik"/>
+                                            <outlet property="userName" destination="9Ox-mw-4ud" id="8ah-2o-cmH"/>
                                             <segue destination="iLg-0h-8An" kind="show" id="7nt-rV-rmE"/>
                                         </connections>
                                     </tableViewCell>
@@ -226,10 +226,10 @@
             </objects>
             <point key="canvasLocation" x="2150" y="378"/>
         </scene>
-        <!--User Detail View Controller-->
+        <!--Friend Detail View Controller-->
         <scene sceneID="5w2-Gm-vjr">
             <objects>
-                <viewController id="iLg-0h-8An" customClass="AKUserDetailViewController" sceneMemberID="viewController">
+                <viewController id="iLg-0h-8An" customClass="AKFriendDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yfv-XO-cvf"/>
                         <viewControllerLayoutGuide type="bottom" id="lfW-qR-Iu6"/>

@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <FEMManagedObjectMapping.h>
+#import <FEMObjectMapping.h>
 
 @interface AKMappingProvider : NSObject
 
 + (FEMManagedObjectMapping *)friendMapping;
++ (FEMObjectMapping *)userMapping;
 
 @end

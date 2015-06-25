@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 ARC. All rights reserved.
 //
 
-#import "AKUserDetailViewController.h"
+#import "AKFriendDetailViewController.h"
 
-@interface AKUserDetailViewController ()
+@interface AKFriendDetailViewController ()
 
 @end
 
-@implementation AKUserDetailViewController
+@implementation AKFriendDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

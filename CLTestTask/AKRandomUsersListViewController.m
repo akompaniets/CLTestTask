@@ -12,6 +12,7 @@
 #import "AKUserCell.h"
 #import "AKRandomUsersListModel.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "AKUser.h";
 
 @interface AKRandomUsersListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -107,13 +108,16 @@
     if (!cell) {
         cell = [[AKUserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
-    NSString *photoPath = [[self.users objectAtIndex:indexPath.row] valueForKeyPath:@"user.picture.thumbnail"];
-    NSString *title = [(NSString *)[[self.users objectAtIndex:indexPath.row] valueForKeyPath:@"user.name.title"] capitalizedString];
-    NSString *fName = [(NSString *)[[self.users objectAtIndex:indexPath.row] valueForKeyPath:@"user.name.first"] capitalizedString];
-    NSString *lName = [(NSString *)[[self.users objectAtIndex:indexPath.row] valueForKeyPath:@"user.name.last"] capitalizedString];
     
-    NSString *cellTitle = [NSString stringWithFormat:@"%@.%@ %@", title, fName, lName];
-    [cell setupCellForIndexPath:indexPath withPhotoPath:photoPath title:cellTitle];
+    if ([self.selectedIndexes containsIndex:indexPath.row]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
+    }else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
+    AKUser *user = self.users[indexPath.row];
+    [cell configureCellAtIndexPath:indexPath forUser:user];
     
     return cell;
 }
@@ -123,17 +127,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    AKUserCell *cell = (AKUserCell *)[tableView cellForRowAtIndexPath:indexPath];
     NSInteger selectedIndex = indexPath.row;
-  
     if ([self.selectedIndexes containsIndex:selectedIndex]) {
-        cell.accessoryType = UITableViewCellAccessoryNone;
         [self.selectedIndexes removeIndex:selectedIndex];
     } else {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
         [self.selectedIndexes addIndex:selectedIndex];
     }
-    NSLog(@"Selected indexes: %@", self.selectedIndexes);
+    [tableView reloadData];
 }
 
 -(void)dealloc {

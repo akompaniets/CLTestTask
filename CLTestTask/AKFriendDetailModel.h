@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AKUserDetailModel : NSObject
+@interface AKFriendDetailModel : NSObject
 
 @end

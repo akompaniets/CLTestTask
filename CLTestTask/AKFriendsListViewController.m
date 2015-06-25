@@ -6,26 +6,28 @@
 //  Copyright (c) 2015 ARC. All rights reserved.
 //
 
-#import "AKUsersListViewController.h"
-#import "AKUserCell.h"
-#import "AKUsersListModel.h"
+#import "AKFriendsListViewController.h"
+#import "AKFriendCell.h"
+#import "AKFriendsListModel.h"
 #import <CoreData/CoreData.h>
 #import "AKAppDelegate.h"
 #import "AKPopupPresentationViewController.h"
 #import "AKRandomUsersListViewController.h"
 #import "AKAlertView.h"
+#import "AKDatabaseManager.h"
+#import "AKFriend.h"
 
-@interface AKUsersListViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@interface AKFriendsListViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) AKUsersListModel *model;
+@property (strong, nonatomic) AKFriendsListModel *model;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 
 @end
 
-@implementation AKUsersListViewController
+@implementation AKFriendsListViewController
 
 #pragma mark - Life Cycle
 
@@ -56,17 +58,18 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return [[self.fetchedResultsController sections][section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *const cellID = [AKUserCell cellIdentifier];
-    AKUserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+    NSString *const cellID = [AKFriendCell cellIdentifier];
+    AKFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     if (!cell) {
-        cell = [[AKUserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        cell = [[AKFriendCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
-    //cell customization
-    
+    AKFriend *friend = self.fetchedResultsController.fetchedObjects[indexPath.row];
+    [cell configureCellForFriend:friend];
+//    NSLog(@"First anme: %@, Last name: %@, Email: %@", friend.firstName, friend.lastName, friend.email);
     return cell;
     
 }
@@ -93,7 +96,7 @@
 {
     if (!_managedObjectContext)
     {
-//        _managedObjectContext = [[CoreDataManager sharedManager] mainContext];
+        _managedObjectContext = [[AKDatabaseManager sharedManager] managedObjectContext];
     }
     return _managedObjectContext;
 }
