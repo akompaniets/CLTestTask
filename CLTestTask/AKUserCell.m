@@ -30,6 +30,7 @@
 
 - (void)configureCellAtIndexPath:(NSIndexPath *)indexPath forUser:(AKUser *)user {
     self.userName.text = [NSString stringWithFormat:@"%@.%@ %@", user.title, user.firstName, user.lastName];
+    self.userName.font = CustomFont;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     NSString *imageKey = [NSString stringWithFormat:@"cell%ld", indexPath.row];
     UIImage *cachedImage = [self.imageCache objectForKey:imageKey];
