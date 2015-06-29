@@ -12,17 +12,19 @@
 #import "AKMappingProvider.h"
 #import "AKUser.h"
 #import <FEMObjectDeserializer.h>
+#import "AKDownloadOperation.h"
 
 @implementation AKRandomUsersListModel
 
 - (void)fetchNewUserListWithCallback:(void(^)(NSArray *newUsers, NSError *error))callback {
-    AKNetworkManager *manager = [AKNetworkManager new];
+    AKNetworkManager *manager = [AKNetworkManager sharedManager];
     
     [manager fetchRandomUsersWithCallback:^(id usersData, NSError *error) {
         NSArray *tempUsersArray = [usersData objectForKey:@"results"];
         NSMutableArray *users = [NSMutableArray array];
         for (NSDictionary *currentUser in tempUsersArray) {
-            AKUser *user = [FEMObjectDeserializer deserializeObjectExternalRepresentation:currentUser usingMapping:[AKMappingProvider userMapping]];
+            FEMObjectMapping *userMapping = [AKMappingProvider userMapping];
+            AKUser *user = [FEMObjectDeserializer deserializeObjectExternalRepresentation:currentUser usingMapping:userMapping];
             [users addObject:user];
         }
         callback(users, error);
@@ -32,24 +34,38 @@
 
 - (BOOL)saveSelectedUsers:(NSArray *)selectedUsers {
     
+   
+    return YES;
+}
 
-    __block BOOL retValue;
-    [[AKDatabaseManager sharedManager] saveUsers:selectedUsers
-                           withCompletionHandler:^(NSError *error) {
-                               if (error) {
-                                   retValue = NO;
-                               } else {
-                                   retValue = YES;
-                               }
-                           }];
-    return retValue;
+- (void)networkStatusDidChange:(NSNotification *)notification {
     
 }
 
 - (void)saveSelectedUsers:(NSArray *)selectedUsers withCompletionHandler:(void(^)(NSError *error))completionHandler {
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(networkStatusDidChange:)
+//                                                 name:AKNetworkManagerReachabilityStatusDidChangeNotification
+//                                               object:nil];
     
+    NSOperationQueue *downloadQueue = [[NSOperationQueue alloc] init];
+    downloadQueue.name = @"Download Queue";
+    for (AKUser *user in selectedUsers) {
+        
+    }
+
+    [[AKDatabaseManager sharedManager] saveUsers:selectedUsers
+                           withCompletionHandler:^(NSError *error) {
+                               dispatch_async(dispatch_get_main_queue(), ^{
+                                   completionHandler(error);
+                               });
+                               
+                           }];
+    
+
 }
 
-
-
+- (void)dealloc {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AKNetworkManagerReachabilityStatusDidChangeNotification];
+}
 @end

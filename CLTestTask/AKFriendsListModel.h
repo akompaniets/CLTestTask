@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class AKFriend;
 @interface AKFriendsListModel : NSObject
+
+- (void)deleteFriend:(AKFriend *)friend;
 
 @end

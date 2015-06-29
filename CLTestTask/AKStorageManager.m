@@ -10,9 +10,18 @@
 
 @implementation AKStorageManager
 
++ (instancetype)sharedManager {
+   static AKStorageManager *manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        manager = [[AKStorageManager alloc] init];
+    });
+    return manager;
+}
+
 + (BOOL)saveImage:(UIImage *)image {
    
     NSData *imageData = [NSData data];
-    imageData wr
+    return YES;
 }
 @end

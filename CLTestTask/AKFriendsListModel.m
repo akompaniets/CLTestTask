@@ -7,7 +7,17 @@
 //
 
 #import "AKFriendsListModel.h"
+#import "AKFriend.h"
+#import "AKDatabaseManager.h"
+
+@interface AKFriendsListModel()
+
+@end
 
 @implementation AKFriendsListModel
+
+- (void)deleteFriend:(AKFriend *)friend {
+    [[AKDatabaseManager sharedManager] markFriendAsNonFriend:friend];
+}
 
 @end

@@ -191,3 +191,8 @@ Pods/Target Support Files/Pods-CLTestTask-MBProgressHUD/Pods-CLTestTask-MBProgre
 Pods/Target Support Files/Pods-CLTestTask-MBProgressHUD/Pods-CLTestTask-MBProgressHUD-prefix.pch
 Pods/Target Support Files/Pods-CLTestTask-MBProgressHUD/Pods-CLTestTask-MBProgressHUD-Private.xcconfig
 Pods/Target Support Files/Pods-CLTestTask-MBProgressHUD/Pods-CLTestTask-MBProgressHUD.xcconfig
+Pods/Pods.xcodeproj/xcuserdata/Andrew.xcuserdatad/xcschemes/Pods-CLTestTask-AFNetworking.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/Andrew.xcuserdatad/xcschemes/Pods-CLTestTask-FastEasyMapping.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/Andrew.xcuserdatad/xcschemes/Pods-CLTestTask-MBProgressHUD.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/Andrew.xcuserdatad/xcschemes/Pods-CLTestTask.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/Andrew.xcuserdatad/xcschemes/xcschememanagement.plist

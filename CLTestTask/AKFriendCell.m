@@ -13,7 +13,9 @@
 
 - (void)configureCellForFriend:(AKFriend *)friend {
     
-    
+    self.userName.text = [NSString stringWithFormat:@"%@.%@ %@", friend.title, friend.firstName, friend.lastName];
+    self.userName.font = CustomFont;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     
 }
 

@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class AKFriend;
 @interface AKFriendDetailModel : NSObject
+
+- (void)commitChangesForFriend:(AKFriend *)friend;
 
 @end

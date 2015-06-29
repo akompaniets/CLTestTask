@@ -13,13 +13,14 @@
 
 + (FEMManagedObjectMapping *)friendMapping {
     return [FEMManagedObjectMapping mappingForEntityName:@"AKFriend" configuration:^(FEMManagedObjectMapping *sender) {
-        [sender addAttributeWithProperty:@"title" keyPath:@"user.name.title"];
-        [sender addAttributeWithProperty:@"firstName" keyPath:@"user.name.first"];
-        [sender addAttributeWithProperty:@"lastName" keyPath:@"user.name.last"];
-        [sender addAttributeWithProperty:@"phone" keyPath:@"user.phone"];
-        [sender addAttributeWithProperty:@"email" keyPath:@"user.email"];
-        [sender addAttributeWithProperty:@"sha256" keyPath:@"user.sha256"];
-        [sender addAttributeWithProperty:@"photoPath" keyPath:@"user.picture.large"];
+//        [sender addAttributeWithProperty:@"title" keyPath:@"user.name.title"];
+//        [sender addAttributeWithProperty:@"firstName" keyPath:@"user.name.first"];
+//        [sender addAttributeWithProperty:@"lastName" keyPath:@"user.name.last"];
+//        [sender addAttributeWithProperty:@"phone" keyPath:@"user.phone"];
+//        [sender addAttributeWithProperty:@"email" keyPath:@"user.email"];
+//        [sender addAttributeWithProperty:@"sha256" keyPath:@"user.sha256"];
+//        [sender addAttributeWithProperty:@"photoPath" keyPath:@"user.picture.large"];
+        [sender addAttributesFromArray:@[@"title", @"firstName", @"lastName", @"phone", @"email", @"sha256", @"photoPath", @"thumbnailPath"]];
     }];
 }
 

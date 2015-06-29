@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class AKFriend;
 @interface AKFriendDetailViewController : UIViewController
+
+@property (strong, nonatomic) AKFriend *friend;
 
 @end

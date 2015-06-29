@@ -10,6 +10,7 @@
 
 @implementation AKConstants
 
-NSString *URL = @"http://api.randomuser.me/?results=30";
-
+NSString *URL                                                           = @"http://api.randomuser.me/?results=30";
+NSString *AKNetworkManagerReachabilityStatusDidChangeNotification       = @"AKNetworkManagerReachabilityStatusDidChangeNotification";
+NSString *FriendDetailSegue                                             = @"friendDetailSegue";
 @end

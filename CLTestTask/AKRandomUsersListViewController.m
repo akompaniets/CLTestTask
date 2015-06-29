@@ -12,7 +12,7 @@
 #import "AKUserCell.h"
 #import "AKRandomUsersListModel.h"
 #import <MBProgressHUD/MBProgressHUD.h>
-#import "AKUser.h";
+#import "AKUser.h"
 
 @interface AKRandomUsersListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -28,6 +28,7 @@
 + (NSString *)controllerID {
     return NSStringFromClass([self class]);
 }
+
 
 #pragma mark - Life Cycle
 
@@ -69,11 +70,14 @@
     if (self.selectedIndexes && [self.selectedIndexes count] > 0) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         NSArray *selectedUsers = [self.users objectsAtIndexes:self.selectedIndexes];
-        if ([self.model saveSelectedUsers:selectedUsers]) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [self dismissSelf];
-        }
-       
+        __weak typeof(self) weakSelf = self;
+        [self.model saveSelectedUsers:selectedUsers withCompletionHandler:^(NSError *error) {
+            if (!error) {
+                [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+                [weakSelf dismissSelf];
+            }
+        }];
+        
     } else {
         return;
     }

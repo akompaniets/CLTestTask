@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		496D45311B413248003DD784 /* AKDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 496D45301B413248003DD784 /* AKDownloadOperation.m */; };
+		496D45341B413A5C003DD784 /* AKFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 496D45331B413A5C003DD784 /* AKFriend.m */; };
 		DFAA34FC1B3C3AE1004BC7CD /* AKFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAA34FB1B3C3AE1004BC7CD /* AKFriendCell.m */; };
 		DFAA34FF1B3C41BC004BC7CD /* AKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAA34FE1B3C41BC004BC7CD /* AKUser.m */; };
-		DFAA35021B3C4FC6004BC7CD /* AKFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAA35011B3C4FC6004BC7CD /* AKFriend.m */; };
 		DFAA35041B3D43D6004BC7CD /* HelveticaNeue-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFAA35031B3D43D6004BC7CD /* HelveticaNeue-Light.ttf */; };
 		DFAA35081B3D4B1F004BC7CD /* AKStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAA35071B3D4B1F004BC7CD /* AKStorageManager.m */; };
 		DFAB37381B380CBD00CFB161 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAB37371B380CBD00CFB161 /* main.m */; };
@@ -49,13 +50,15 @@
 /* Begin PBXFileReference section */
 		1563A2976779CFC72E65ECEA /* Pods-CLTestTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLTestTask.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CLTestTask/Pods-CLTestTask.debug.xcconfig"; sourceTree = "<group>"; };
 		30CF7C2C04597DD8C53FE82D /* Pods-CLTestTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLTestTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-CLTestTask/Pods-CLTestTask.release.xcconfig"; sourceTree = "<group>"; };
+		496D452F1B413248003DD784 /* AKDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKDownloadOperation.h; sourceTree = "<group>"; };
+		496D45301B413248003DD784 /* AKDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKDownloadOperation.m; sourceTree = "<group>"; };
+		496D45321B413A5C003DD784 /* AKFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFriend.h; sourceTree = "<group>"; };
+		496D45331B413A5C003DD784 /* AKFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFriend.m; sourceTree = "<group>"; };
 		8F48A470B52EDF9A335A9383 /* libPods-CLTestTask.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLTestTask.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFAA34FA1B3C3AE1004BC7CD /* AKFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFriendCell.h; sourceTree = "<group>"; };
 		DFAA34FB1B3C3AE1004BC7CD /* AKFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFriendCell.m; sourceTree = "<group>"; };
 		DFAA34FD1B3C41BC004BC7CD /* AKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKUser.h; sourceTree = "<group>"; };
 		DFAA34FE1B3C41BC004BC7CD /* AKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKUser.m; sourceTree = "<group>"; };
-		DFAA35001B3C4FC6004BC7CD /* AKFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFriend.h; sourceTree = "<group>"; };
-		DFAA35011B3C4FC6004BC7CD /* AKFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFriend.m; sourceTree = "<group>"; };
 		DFAA35031B3D43D6004BC7CD /* HelveticaNeue-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Light.ttf"; sourceTree = "<group>"; };
 		DFAA35061B3D4B1F004BC7CD /* AKStorageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKStorageManager.h; sourceTree = "<group>"; };
 		DFAA35071B3D4B1F004BC7CD /* AKStorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKStorageManager.m; sourceTree = "<group>"; };
@@ -220,6 +223,8 @@
 				DFC3A9721B39555A007DB473 /* AKAlertView.m */,
 				DFAA34FD1B3C41BC004BC7CD /* AKUser.h */,
 				DFAA34FE1B3C41BC004BC7CD /* AKUser.m */,
+				496D452F1B413248003DD784 /* AKDownloadOperation.h */,
+				496D45301B413248003DD784 /* AKDownloadOperation.m */,
 			);
 			name = "Support Classes";
 			sourceTree = "<group>";
@@ -227,8 +232,8 @@
 		DFFD768D1B38212D0026EFD8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				DFAA35051B3D4B04004BC7CD /* Storage Manager */,
 				DFC3A9701B395539007DB473 /* Support Classes */,
+				DFAA35051B3D4B04004BC7CD /* Storage Manager */,
 				DFFD76AB1B3828940026EFD8 /* Mapping Provider */,
 				DFFD76971B3822A40026EFD8 /* Database Manager */,
 				DFFD76961B38229B0026EFD8 /* Network Manager */,
@@ -291,8 +296,8 @@
 		DFFD76AA1B3828850026EFD8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DFAA35001B3C4FC6004BC7CD /* AKFriend.h */,
-				DFAA35011B3C4FC6004BC7CD /* AKFriend.m */,
+				496D45321B413A5C003DD784 /* AKFriend.h */,
+				496D45331B413A5C003DD784 /* AKFriend.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -454,6 +459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFE6652B1B3AF65600D8238B /* AKMappingProvider.m in Sources */,
+				496D45341B413A5C003DD784 /* AKFriend.m in Sources */,
 				DFAA35081B3D4B1F004BC7CD /* AKStorageManager.m in Sources */,
 				DFFD76931B38225D0026EFD8 /* AKFriendsListModel.m in Sources */,
 				DFFD76B21B383A9E0026EFD8 /* AKPopupPresentationViewController.m in Sources */,
@@ -465,9 +471,9 @@
 				DFC3A9731B39555A007DB473 /* AKAlertView.m in Sources */,
 				DFAA34FF1B3C41BC004BC7CD /* AKUser.m in Sources */,
 				DFFD76A01B38241B0026EFD8 /* AKRandomUsersListViewController.m in Sources */,
-				DFAA35021B3C4FC6004BC7CD /* AKFriend.m in Sources */,
 				DFFD76901B38223B0026EFD8 /* AKFriendsListViewController.m in Sources */,
 				DFFD76A61B3828650026EFD8 /* AKNetworkManager.m in Sources */,
+				496D45311B413248003DD784 /* AKDownloadOperation.m in Sources */,
 				DFFD768C1B3821100026EFD8 /* AKConstants.m in Sources */,
 				DFFD769D1B3823D00026EFD8 /* AKFriendDetailModel.m in Sources */,
 				DFAB37381B380CBD00CFB161 /* main.m in Sources */,

@@ -16,6 +16,7 @@
 #import "AKAlertView.h"
 #import "AKDatabaseManager.h"
 #import "AKFriend.h"
+#import "AKFriendDetailViewController.h"
 
 @interface AKFriendsListViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
@@ -47,12 +48,29 @@
 //    self.tableView.hidden = YES;
 }
 
+- (AKFriendsListModel *)model {
+    if (!_model) {
+        _model = [AKFriendsListModel new];
+    }
+    return _model;
+}
+
 #pragma mark - Actions
 
 - (IBAction)addNewUser:(UIBarButtonItem *)sender {
-    AKPopupPresentationViewController *presentationVC = (AKPopupPresentationViewController *)[AKAppDelegate sharedDelegate].window.rootViewController;
+    AKPopupPresentationViewController *presentationVC = (AKPopupPresentationViewController *)[[AKAppDelegate sharedDelegate] window].rootViewController;
     AKRandomUsersListViewController *randomUsersListVC = [self.storyboard instantiateViewControllerWithIdentifier:[AKRandomUsersListViewController controllerID]];
     [presentationVC showPopupViewController:randomUsersListVC];
+}
+
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:FriendDetailSegue]) {
+        AKFriendDetailViewController *friendDetailVC = segue.destinationViewController;
+        AKFriend *friend = [self.fetchedResultsController fetchedObjects][[self.tableView indexPathForSelectedRow].row];
+        friendDetailVC.friend = friend;
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -69,7 +87,6 @@
     }
     AKFriend *friend = self.fetchedResultsController.fetchedObjects[indexPath.row];
     [cell configureCellForFriend:friend];
-//    NSLog(@"First anme: %@, Last name: %@, Email: %@", friend.firstName, friend.lastName, friend.email);
     return cell;
     
 }
@@ -80,7 +97,8 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
+        AKFriend *friend = self.fetchedResultsController.fetchedObjects[indexPath.row];
+        [self.model deleteFriend:friend];
     }
 }
 
@@ -96,7 +114,7 @@
 {
     if (!_managedObjectContext)
     {
-        _managedObjectContext = [[AKDatabaseManager sharedManager] managedObjectContext];
+        _managedObjectContext = [[AKDatabaseManager sharedManager] mainContext];
     }
     return _managedObjectContext;
 }
@@ -117,7 +135,7 @@
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"firstName"
                                                                    ascending:YES];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"friend != NO"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFriend == %@", @(YES)];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
@@ -130,13 +148,13 @@
                                                    cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
-    
+
     NSError *error = nil;
-    if (![self.fetchedResultsController performFetch:&error])
-    {
-        NSLog(@"Fetching error %@, %@", error, [error userInfo]);
-        abort();
-    }
+        if (![self.fetchedResultsController performFetch:&error])
+        {
+            NSLog(@"Fetching error %@, %@", error, [error userInfo]);
+            abort();
+        }
     
     return _fetchedResultsController;
 }
@@ -161,13 +179,13 @@
             break;
             
         case NSFetchedResultsChangeDelete:
-            
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
-        case NSFetchedResultsChangeUpdate:
-           [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        case NSFetchedResultsChangeUpdate: {
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }
             break;
-
     }
 }
 

@@ -9,15 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class AKFriend;
 @interface AKDatabaseManager : NSObject
 
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (strong, nonatomic) NSManagedObjectContext *mainContext;
 
 + (instancetype)sharedManager;
-- (void)saveContext;
-- (NSURL *)applicationDocumentsDirectory;
 - (void)saveUsers:(NSArray *)users withCompletionHandler:(void(^)(NSError *error))completionHandler;
-
+- (void)markFriendAsNonFriend:(AKFriend *)friend;
+- (void)updateChangesForFriend:(AKFriend *)friend;
 @end

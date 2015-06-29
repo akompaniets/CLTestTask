@@ -7,7 +7,12 @@
 //
 
 #import "AKFriendDetailModel.h"
+#import "AKDatabaseManager.h"
 
 @implementation AKFriendDetailModel
+
+- (void)commitChangesForFriend:(AKFriend *)friend {
+    [[AKDatabaseManager sharedManager] updateChangesForFriend:friend];
+}
 
 @end

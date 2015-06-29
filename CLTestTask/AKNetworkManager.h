@@ -11,6 +11,8 @@
 
 @interface AKNetworkManager : AFURLSessionManager
 
+@property (strong, nonatomic) AFNetworkReachabilityManager *reachability;
+
 + (instancetype)sharedManager;
 - (void)fetchRandomUsersWithCallback:(void(^)(id usersData, NSError *error))callback;
 

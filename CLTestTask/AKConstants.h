@@ -18,12 +18,13 @@ typedef NS_ENUM(NSInteger, AKAlertViewSeverity) {
 #define WarningColor [UIColor colorWithRed:237./255. green:236./255. blue:121./255. alpha:1.0]
 #define SuccessColor [UIColor colorWithRed:80./255. green:195./255. blue:84./255. alpha:1.0]
 #define CustomFont [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f];
+#define isNetworkAvailable [[AKNetworkManager sharedManager] reachability].isReachable
+#define NormalButtonColor [UIColor colorWithRed:0 green:122.0/255. blue:255.0/255. alpha:1.0]
+#define HighlightedButtonColor [UIColor colorWithRed:198./255. green:222.0/255. blue:249.0/255. alpha:1.0]
 
 @interface AKConstants : NSObject
 
 extern NSString *URL;
-
-
-
-
+extern NSString *AKNetworkManagerReachabilityStatusDidChangeNotification;
+extern NSString *FriendDetailSegue;
 @end

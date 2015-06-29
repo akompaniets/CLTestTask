@@ -2,7 +2,7 @@
 //  AKFriend.m
 //  CLTestTask
 //
-//  Created by Mobindustry on 6/25/15.
+//  Created by Andrey Kompaniets on 29.06.15.
 //  Copyright (c) 2015 ARC. All rights reserved.
 //
 
@@ -13,12 +13,12 @@
 
 @dynamic email;
 @dynamic firstName;
-@dynamic friend;
+@dynamic isFriend;
 @dynamic lastName;
 @dynamic phone;
 @dynamic photoPath;
 @dynamic sha256;
-@dynamic title;
 @dynamic thumbnailPath;
+@dynamic title;
 
 @end
