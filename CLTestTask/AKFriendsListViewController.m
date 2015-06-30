@@ -13,7 +13,6 @@
 #import "AKAppDelegate.h"
 #import "AKPopupPresentationViewController.h"
 #import "AKRandomUsersListViewController.h"
-#import "AKAlertView.h"
 #import "AKDatabaseManager.h"
 #import "AKFriend.h"
 #import "AKFriendDetailViewController.h"
@@ -124,7 +123,7 @@
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
-    
+   
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"AKFriend"
@@ -148,14 +147,15 @@
                                                    cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
-
+//    dispatch_queue_t fetchQueue = dispatch_queue_create("com.akompanietc.fetch_queue", DISPATCH_QUEUE_SERIAL);
+//    dispatch_sync(fetchQueue, ^{
     NSError *error = nil;
         if (![self.fetchedResultsController performFetch:&error])
         {
             NSLog(@"Fetching error %@, %@", error, [error userInfo]);
             abort();
         }
-    
+//   });
     return _fetchedResultsController;
 }
 

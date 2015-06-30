@@ -201,9 +201,10 @@
         }];
     }
     __block NSError *error = nil;
+    __weak typeof(self) weakSelf = self;
     [self.writerContext performBlockAndWait:^{
         
-        if ([self.writerContext save:&error])
+        if ([weakSelf.writerContext save:&error])
         {
 #if DEBUG
             NSLog(@"Writer Context Saved!");

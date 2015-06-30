@@ -7,3 +7,8 @@
 */
 
 "friend_list_title" = "Friends List";
+"user_list_title" = "Users List";
+"warning" = "Warning!";
+"error" = "Error!";
+"done" = "Done";
+"cancel" = "Cancel";

@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
+@property (strong, nonatomic) NSCache *imageCache;
 
 + (NSString *)cellIdentifier;
 - (void)configureCellAtIndexPath:(NSIndexPath *)indexPath forUser:(AKUser *)user;

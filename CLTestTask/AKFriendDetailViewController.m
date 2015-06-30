@@ -9,6 +9,7 @@
 #import "AKFriendDetailViewController.h"
 #import "AKFriend.h"
 #import "AKFriendDetailModel.h"
+#import "AKStorageManager.h"
 
 static CGFloat keyboardHeight = 253.0;
 static CGFloat defaultConstraintConstant = 25.0;
@@ -37,7 +38,7 @@ static CGFloat defaultConstraintConstant = 25.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     screenHeight = self.view.frame.size.height;
-    
+    self.userPhoto.image = [self.model fetchImageForFilePath:self.friend.photoPath];
     self.userNameField.text = [NSString stringWithFormat:@"%@.%@ %@", self.friend.title, self.friend.firstName, self.friend.lastName];
     self.emailField.text = self.friend.email;
     self.phoneField.text = self.friend.phone;
@@ -51,7 +52,7 @@ static CGFloat defaultConstraintConstant = 25.0;
     UIFont *buttomFont = [UIFont systemFontOfSize:17.0];
     
     UIButton *backButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 60.0f, 30.0f)];
-    [backButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    [backButton setTitle:NSLocalizedString(@"cancel", nil) forState:UIControlStateNormal];
     backButton.titleLabel.font = buttomFont;
     [backButton setTitleColor:NormalButtonColor forState:UIControlStateNormal];
     [backButton setTitleColor:HighlightedButtonColor forState:UIControlStateHighlighted];
@@ -60,7 +61,7 @@ static CGFloat defaultConstraintConstant = 25.0;
     self.navigationItem.leftBarButtonItem = backButtonItem;
     
     UIButton *doneButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 60.0f, 30.0f)];
-    [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+    [doneButton setTitle:NSLocalizedString(@"done", nil) forState:UIControlStateNormal];
     doneButton.titleLabel.font = buttomFont;
     [doneButton setTitleColor:NormalButtonColor forState:UIControlStateNormal];
     [doneButton setTitleColor:HighlightedButtonColor forState:UIControlStateHighlighted];
@@ -143,8 +144,6 @@ static CGFloat defaultConstraintConstant = 25.0;
         default:
             break;
     }
-
-    
 }
 
 #pragma mark - UITextFieldDelegate

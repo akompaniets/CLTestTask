@@ -11,8 +11,6 @@
 
 @interface AKUserCell()
 
-@property (strong, nonatomic) NSCache *imageCache;
-
 @end
 
 @implementation AKUserCell
@@ -38,18 +36,18 @@
         self.userImage.image = cachedImage;
     } else {
         self.userImage.image = [UIImage imageNamed:@"didntLoad"];
+        __weak typeof(self) weakSelf = self;
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:user.thumbnailUrl]];
             UIImage *image = [UIImage imageWithData:imageData];
             if (image) {
-                [self.imageCache setObject:image forKey:imageKey];
+                [weakSelf.imageCache setObject:image forKey:imageKey];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    self.userImage.image = image;
+                    weakSelf.userImage.image = image;
                 });
             }
         });
     }
-    
 }
 
 @end

@@ -19,6 +19,7 @@
 @property (strong, nonatomic) AKRandomUsersListModel *model;
 @property (strong, nonatomic) NSArray *users;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 @property (strong, nonatomic) NSMutableIndexSet *selectedIndexes;
 
 @end
@@ -35,14 +36,21 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.model = [AKRandomUsersListModel new];
+    self.navBar.topItem.title = NSLocalizedString(@"user_list_title", nil);
+    self.model = [AKRandomUsersListModel sharedModel];
    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __block typeof(self) weakSelf = self;
     [self.model fetchNewUserListWithCallback:^(NSArray *newUsers, NSError *error) {
         
         if (error) {
-            NSLog(@"Something wrong!");
+            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"error", nil)
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil, nil];
+            [alert show];
         } else {
             weakSelf.users = newUsers;
             [weakSelf.tableView reloadData];

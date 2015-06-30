@@ -27,4 +27,5 @@ typedef NS_ENUM(NSInteger, AKAlertViewSeverity) {
 extern NSString *URL;
 extern NSString *AKNetworkManagerReachabilityStatusDidChangeNotification;
 extern NSString *FriendDetailSegue;
+
 @end

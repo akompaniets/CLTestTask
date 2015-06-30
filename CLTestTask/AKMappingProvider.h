@@ -12,7 +12,6 @@
 
 @interface AKMappingProvider : NSObject
 
-+ (FEMManagedObjectMapping *)friendMapping;
 + (FEMObjectMapping *)userMapping;
 
 @end

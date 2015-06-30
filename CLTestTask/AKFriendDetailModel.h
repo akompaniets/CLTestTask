@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 @class AKFriend;
 @interface AKFriendDetailModel : NSObject
 
 - (void)commitChangesForFriend:(AKFriend *)friend;
+- (UIImage *)fetchImageForFilePath:(NSString *)path;
 
 @end

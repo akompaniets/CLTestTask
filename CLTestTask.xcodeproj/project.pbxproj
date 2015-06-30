@@ -20,7 +20,6 @@
 		DFAB37461B380CBD00CFB161 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFAB37451B380CBD00CFB161 /* Images.xcassets */; };
 		DFAB37491B380CBD00CFB161 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFAB37471B380CBD00CFB161 /* LaunchScreen.xib */; };
 		DFAB37551B380CBD00CFB161 /* CLTestTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAB37541B380CBD00CFB161 /* CLTestTaskTests.m */; };
-		DFC3A9731B39555A007DB473 /* AKAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC3A9721B39555A007DB473 /* AKAlertView.m */; };
 		DFC3A9771B3973C2007DB473 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DFC3A9791B3973C2007DB473 /* Localizable.strings */; };
 		DFE6652B1B3AF65600D8238B /* AKMappingProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = DFE6652A1B3AF65600D8238B /* AKMappingProvider.m */; };
 		DFFD768C1B3821100026EFD8 /* AKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFD768B1B3821100026EFD8 /* AKConstants.m */; };
@@ -74,8 +73,6 @@
 		DFAB374E1B380CBD00CFB161 /* CLTestTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLTestTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFAB37531B380CBD00CFB161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DFAB37541B380CBD00CFB161 /* CLTestTaskTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLTestTaskTests.m; sourceTree = "<group>"; };
-		DFC3A9711B39555A007DB473 /* AKAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKAlertView.h; sourceTree = "<group>"; };
-		DFC3A9721B39555A007DB473 /* AKAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKAlertView.m; sourceTree = "<group>"; };
 		DFC3A9781B3973C2007DB473 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DFC3A97A1B3973D4007DB473 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DFE665291B3AF65600D8238B /* AKMappingProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKMappingProvider.h; sourceTree = "<group>"; };
@@ -219,8 +216,6 @@
 		DFC3A9701B395539007DB473 /* Support Classes */ = {
 			isa = PBXGroup;
 			children = (
-				DFC3A9711B39555A007DB473 /* AKAlertView.h */,
-				DFC3A9721B39555A007DB473 /* AKAlertView.m */,
 				DFAA34FD1B3C41BC004BC7CD /* AKUser.h */,
 				DFAA34FE1B3C41BC004BC7CD /* AKUser.m */,
 				496D452F1B413248003DD784 /* AKDownloadOperation.h */,
@@ -468,7 +463,6 @@
 				DFAA34FC1B3C3AE1004BC7CD /* AKFriendCell.m in Sources */,
 				DFFD76A91B38287A0026EFD8 /* AKDatabaseManager.m in Sources */,
 				DFFD769A1B3823820026EFD8 /* AKFriendDetailViewController.m in Sources */,
-				DFC3A9731B39555A007DB473 /* AKAlertView.m in Sources */,
 				DFAA34FF1B3C41BC004BC7CD /* AKUser.m in Sources */,
 				DFFD76A01B38241B0026EFD8 /* AKRandomUsersListViewController.m in Sources */,
 				DFFD76901B38223B0026EFD8 /* AKFriendsListViewController.m in Sources */,

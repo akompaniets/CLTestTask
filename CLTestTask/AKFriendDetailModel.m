@@ -8,11 +8,19 @@
 
 #import "AKFriendDetailModel.h"
 #import "AKDatabaseManager.h"
+#import "AKStorageManager.h"
 
 @implementation AKFriendDetailModel
 
 - (void)commitChangesForFriend:(AKFriend *)friend {
     [[AKDatabaseManager sharedManager] updateChangesForFriend:friend];
+}
+
+- (UIImage *)fetchImageForFilePath:(NSString *)path {
+    NSData *imageData = [AKStorageManager loadImageDataForFileName:path];
+    UIImage *image = [UIImage imageWithData:imageData];
+    
+    return image;
 }
 
 @end

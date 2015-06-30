@@ -7,6 +7,7 @@
 //
 
 #import "AKAppDelegate.h"
+#import "AKStorageManager.h"
 
 @interface AKAppDelegate ()
 
@@ -17,6 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 //    [self setupAppearance];
+
     return YES;
 }
 

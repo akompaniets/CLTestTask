@@ -12,7 +12,7 @@
 @interface AKStorageManager : NSObject
 
 + (instancetype)sharedManager;
-+ (BOOL)saveImage:(UIImage *)image;
-+ (UIImage *)loadImageForPath:(NSString *)filePath;
++ (void)saveImageData:(NSData *)imageData withName:(NSString *)name;
++ (NSData *)loadImageDataForFileName:(NSString *)fileName;
 
 @end
