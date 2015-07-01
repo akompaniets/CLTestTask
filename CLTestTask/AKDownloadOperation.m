@@ -7,38 +7,46 @@
 //
 
 #import "AKDownloadOperation.h"
+#import "AKUser.h"
+#import "AKStorageManager.h"
+#import "AKDatabaseManager.h"
 
 @interface AKDownloadOperation()
 
 @property (strong, nonatomic) NSString *thumbnailURL;
 @property (strong, nonatomic) NSString *photoURL;
+@property (strong, nonatomic) AKUser *user;
 
 
 @end
 
 @implementation AKDownloadOperation
-
-- (instancetype)initWithThumbnailURL:(NSString *)thumbnailURL photoURL:(NSString *)photoURL delegate:(id<AKDownloadOperationDelegate>)delegate {
+- (instancetype)initWithUser:(AKUser *)user {
     self = [super init];
     if (self) {
-        self.thumbnailURL = thumbnailURL;
-        self.photoURL = photoURL;
-        if (delegate) {
-            self.delegate = delegate;
-        }
+        self.user = user;
     }
     return self;
 }
 
 - (void)main {
     @autoreleasepool {
-        self.thumbnailData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.thumbnailURL]];
         
-        self.photoData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.photoURL]];
+        NSData *photo = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.user.photoUrl]];
+        NSData *thumbnail = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.user.thumbnailUrl]];
         
-        if ([self.delegate respondsToSelector:@selector(downloadOperationDidFinish:)]) {
-            [self.delegate downloadOperationDidFinish:self];
-        }
+        NSString *photoName = [NSString stringWithFormat:@"photo_%@", self.user.sha256];
+        NSString *thumbnailName = [NSString stringWithFormat:@"thumbnail_%@", self.user.sha256];
+        
+        [AKStorageManager saveImageData:photo withName:photoName];
+        [AKStorageManager saveImageData:thumbnail withName:thumbnailName];
+        
+        self.user.photoUrl = photoName;
+        self.user.thumbnailUrl = thumbnailName;
+        
+        [[AKDatabaseManager sharedManager] saveUsers:@[self.user]
+                               withCompletionHandler:nil];
+        
     }
 }
 

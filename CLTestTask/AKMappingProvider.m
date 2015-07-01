@@ -20,7 +20,7 @@
         [mapping addAttributeWithProperty:@"email" keyPath:@"user.email"];
         [mapping addAttributeWithProperty:@"sha256" keyPath:@"user.sha256"];
         [mapping addAttributeWithProperty:@"thumbnailUrl" keyPath:@"user.picture.thumbnail"];
-        [mapping addAttributeWithProperty:@"photoUrl" keyPath:@"user.picture.large"];
+        [mapping addAttributeWithProperty:@"photoUrl" keyPath:@"user.picture.medium"];
     }];
 }
 

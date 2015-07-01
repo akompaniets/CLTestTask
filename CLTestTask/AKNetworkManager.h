@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AFNetworking/AFURLSessionManager.h>
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
 
-@interface AKNetworkManager : AFURLSessionManager
+@interface AKNetworkManager : AFHTTPRequestOperationManager
 
 @property (strong, nonatomic) AFNetworkReachabilityManager *reachability;
 

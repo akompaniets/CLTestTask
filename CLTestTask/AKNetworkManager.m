@@ -35,21 +35,29 @@
 
 - (void)fetchRandomUsersWithCallback:(void(^)(id usersData, NSError *error))callback {
     
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:URL]];
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-    
-        if (error) {
-            NSLog(@"Error: %@", error);
-            callback(nil, error);
-        } else {
-//            NSLog(@"%@ %@", response, responseObject);
-            callback(responseObject, nil);
-        }
-        [dataTask cancel];
-    }];
-    [dataTask resume];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                                                    NSLog(@"JSON: %@", responseObject);
+                                                    callback(responseObject,nil);
+                                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                    NSLog(@"Error: %@", error);
+                                                    callback(nil,error);
+                                            }];
+//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+//    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:URL]];
+//    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+//    
+//        if (error) {
+//            NSLog(@"Error: %@", error);
+//            callback(nil, error);
+//        } else {
+////            NSLog(@"%@ %@", response, responseObject);
+//            callback(responseObject, nil);
+//        }
+//        [dataTask cancel];
+//    }];
+//    [dataTask resume];
 }
 
 @end

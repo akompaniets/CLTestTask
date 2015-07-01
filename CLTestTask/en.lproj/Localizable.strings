@@ -12,3 +12,5 @@
 "error" = "Error!";
 "done" = "Done";
 "cancel" = "Cancel";
+"message" = "Message!";
+"empty_friend_list" = "There isn't any friend in your list. Please tap plus button to add someone.";

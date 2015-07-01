@@ -20,6 +20,8 @@
 @interface AKFriendsListViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *activityViewVerticalConstraint;
 @property (strong, nonatomic) AKFriendsListModel *model;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -33,6 +35,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(userHandlingStatusDidChange:)
+                                                 name:AKRandomUsersListModelDidChangeUserHandlingStatusNotification
+                                               object:nil];
+    
     self.title = NSLocalizedString(@"friend_list_title", nil);
 }
 
@@ -43,8 +50,14 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-//    [AKAlertView showAlertInView:self.view withTitle:@"Test Test Test Test" message:@"flskdjf sdfsj fsfsljf sdfsdf" severity:AKAlertViewSeverityWarning];
-//    self.tableView.hidden = YES;
+    if ([self.fetchedResultsController.fetchedObjects count] == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"message", nil)
+                                                        message:NSLocalizedString(@"empty_friend_list", nil)
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+    }    
 }
 
 - (AKFriendsListModel *)model {
@@ -60,6 +73,29 @@
     AKPopupPresentationViewController *presentationVC = (AKPopupPresentationViewController *)[[AKAppDelegate sharedDelegate] window].rootViewController;
     AKRandomUsersListViewController *randomUsersListVC = [self.storyboard instantiateViewControllerWithIdentifier:[AKRandomUsersListViewController controllerID]];
     [presentationVC showPopupViewController:randomUsersListVC];
+}
+
+- (void)showFriendLoadingActivityView:(BOOL)show {
+    if (show) {
+        self.activityViewVerticalConstraint.constant = 0;
+        [self.activityIndicator startAnimating];
+    } else {
+        self.activityViewVerticalConstraint.constant = 35.0;
+        [self.activityIndicator startAnimating];
+    }
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)userHandlingStatusDidChange:(NSNotification *)notification {
+    NSInteger status = [[[notification object] objectForKey:@"status"] integerValue];
+    if (status == DidStartUserHandling) {
+        [self showFriendLoadingActivityView:YES];
+    } else {
+        [self showFriendLoadingActivityView:NO];
+    }
+    
 }
 
 #pragma mark - Segue
@@ -147,15 +183,13 @@
                                                    cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
-//    dispatch_queue_t fetchQueue = dispatch_queue_create("com.akompanietc.fetch_queue", DISPATCH_QUEUE_SERIAL);
-//    dispatch_sync(fetchQueue, ^{
     NSError *error = nil;
         if (![self.fetchedResultsController performFetch:&error])
         {
             NSLog(@"Fetching error %@, %@", error, [error userInfo]);
             abort();
         }
-//   });
+
     return _fetchedResultsController;
 }
 
@@ -191,5 +225,9 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AKRandomUsersListModelDidChangeUserHandlingStatusNotification];
 }
 @end

@@ -14,6 +14,11 @@ typedef NS_ENUM(NSInteger, AKAlertViewSeverity) {
     AKAlertViewSeveritySuccess = 2
 };
 
+typedef NS_ENUM(NSInteger, UserHandlingStatus) {
+    DidStartUserHandling = 0,
+    DidFinishUserHandling = 1,
+};
+
 #define ErrorColor [UIColor colorWithRed:236./255. green:85./255. blue:85./255. alpha:1.0]
 #define WarningColor [UIColor colorWithRed:237./255. green:236./255. blue:121./255. alpha:1.0]
 #define SuccessColor [UIColor colorWithRed:80./255. green:195./255. blue:84./255. alpha:1.0]
@@ -26,6 +31,8 @@ typedef NS_ENUM(NSInteger, AKAlertViewSeverity) {
 
 extern NSString *URL;
 extern NSString *AKNetworkManagerReachabilityStatusDidChangeNotification;
+extern NSString *AKRandomUsersListModelDidChangeUserHandlingStatusNotification;
+extern NSString *FriendDetailSegue;
 extern NSString *FriendDetailSegue;
 
 @end

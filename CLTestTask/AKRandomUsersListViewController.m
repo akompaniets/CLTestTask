@@ -14,12 +14,13 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "AKUser.h"
 
-@interface AKRandomUsersListViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface AKRandomUsersListViewController () <UITableViewDataSource, UITableViewDelegate, AKRandomUsersListModelDelegate>
 
 @property (strong, nonatomic) AKRandomUsersListModel *model;
 @property (strong, nonatomic) NSArray *users;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (strong, nonatomic) NSMutableIndexSet *selectedIndexes;
 
 @end
@@ -38,7 +39,8 @@
     [super viewDidLoad];
     self.navBar.topItem.title = NSLocalizedString(@"user_list_title", nil);
     self.model = [AKRandomUsersListModel sharedModel];
-   
+    self.model.delegate = self;
+    self.doneButton.enabled = NO;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __block typeof(self) weakSelf = self;
     [self.model fetchNewUserListWithCallback:^(NSArray *newUsers, NSError *error) {
@@ -76,14 +78,14 @@
 - (IBAction)addUsersToFriendList:(UIBarButtonItem *)sender {
     
     if (self.selectedIndexes && [self.selectedIndexes count] > 0) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         NSArray *selectedUsers = [self.users objectsAtIndexes:self.selectedIndexes];
         __weak typeof(self) weakSelf = self;
-        [self.model saveSelectedUsers:selectedUsers withCompletionHandler:^(NSError *error) {
-            if (!error) {
-                [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+        [self.model saveSelectedUsers:selectedUsers withCompletionHandler:^{
+            
+//                [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
                 [weakSelf dismissSelf];
-            }
+            
         }];
         
     } else {
@@ -96,6 +98,7 @@
     [(AKPopupPresentationViewController *)([[AKAppDelegate sharedDelegate] window].rootViewController) hidePopupViewController];
 }
 
+
 #pragma mark -
 
 - (NSMutableIndexSet *)selectedIndexes {
@@ -105,6 +108,7 @@
     }
     return _selectedIndexes;
 }
+
 
 #pragma mark - UITableViewDataSource
 
@@ -145,8 +149,23 @@
     } else {
         [self.selectedIndexes addIndex:selectedIndex];
     }
+    
+    if ([self.selectedIndexes count] == 0) {
+        self.doneButton.enabled = NO;
+    } else {
+        self.doneButton.enabled = YES;
+    }
     [tableView reloadData];
 }
+
+#pragma mark - AKRandomUsersListModelDelegate
+
+- (void)modelDidFinishHandling:(AKRandomUsersListModel *)model {
+//    [MBProgressHUD hideHUDForView:self.view animated:NO];
+//    [self dismissSelf];
+}
+
+#pragma mark - Dealloc
 
 -(void)dealloc {
     NSLog(@"Controller was deallocated");

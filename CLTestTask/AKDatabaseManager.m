@@ -129,30 +129,30 @@
 }
 
 - (void)saveUsers:(NSArray *)users withCompletionHandler:(void(^)(NSError *error))completionHandler {
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        
-        for (AKUser *currentUser in users) {
-            if ([self checkUserForExisting:currentUser]) {
-                continue;
-            }
-            AKFriend *friend = [NSEntityDescription insertNewObjectForEntityForName:@"AKFriend" inManagedObjectContext:self.mainContext];
-            
-            friend.title = currentUser.title;
-            friend.firstName = currentUser.firstName;
-            friend.lastName = currentUser.lastName;
-            friend.sha256 = currentUser.sha256;
-            friend.email = currentUser.email;
-            friend.phone = currentUser.phone;
-            friend.thumbnailPath = currentUser.thumbnailUrl;
-            friend.photoPath = currentUser.photoUrl;
-            friend.isFriend = @(YES);
+    
+    for (AKUser *currentUser in users) {
+        if ([self checkUserForExisting:currentUser]) {
+            continue;
         }
+        AKFriend *friend = [NSEntityDescription insertNewObjectForEntityForName:@"AKFriend" inManagedObjectContext:self.mainContext];
         
-        [self saveContextWithCallback:^(NSError *error) {
+        friend.title = currentUser.title;
+        friend.firstName = currentUser.firstName;
+        friend.lastName = currentUser.lastName;
+        friend.sha256 = currentUser.sha256;
+        friend.email = currentUser.email;
+        friend.phone = currentUser.phone;
+        friend.thumbnailPath = currentUser.thumbnailUrl;
+        friend.photoPath = currentUser.photoUrl;
+        friend.isFriend = @(YES);
+    }
+    
+    [self saveContextWithCallback:^(NSError *error) {
+        if (completionHandler) {
             completionHandler(error);
-        }];
-        
-    });
+        }
+    }];
+
 }
 
 - (BOOL)checkUserForExisting:(AKUser *)user {
@@ -186,28 +186,26 @@
 #pragma mark - Core Data Saving
 
 - (void)saveContextWithCallback:(void(^)(NSError *error))callback {
-
-    NSManagedObjectContext *managedObjectContext = self.mainContext;
-    if (managedObjectContext != nil)
-    {
-        [managedObjectContext performBlockAndWait:^{
+     __weak typeof(self) weakSelf = self;
+  
+        [self.mainContext performBlockAndWait:^{
             NSError *error = nil;
-            if ([managedObjectContext save:&error])
+            if ([weakSelf.mainContext save:&error])
             {
 #if DEBUG
-                NSLog(@"Main Context Saved!");
+                NSLog(@"%@", error ? [error localizedDescription] : @"Main Context Saved!");
 #endif
             }
         }];
-    }
+    
     __block NSError *error = nil;
-    __weak typeof(self) weakSelf = self;
+
     [self.writerContext performBlockAndWait:^{
         
         if ([weakSelf.writerContext save:&error])
         {
 #if DEBUG
-            NSLog(@"Writer Context Saved!");
+            NSLog(@"%@", error ? [error localizedDescription] : @"Writer Context Saved!");
 #endif
         };
     }];

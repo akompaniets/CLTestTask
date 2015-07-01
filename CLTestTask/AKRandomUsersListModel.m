@@ -15,7 +15,7 @@
 #import "AKDownloadOperation.h"
 #import "AKStorageManager.h"
 
-@interface AKRandomUsersListModel() <AKDownloadOperationDelegate>
+@interface AKRandomUsersListModel() 
 
 @property (strong, nonatomic) NSOperationQueue *downloadQueue;
 @property (copy, nonatomic) NSMutableArray *processedUsers;
@@ -44,7 +44,9 @@
             AKUser *user = [FEMObjectDeserializer deserializeObjectExternalRepresentation:currentUser usingMapping:userMapping];
             [users addObject:user];
         }
-        callback(users, error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            callback(users, error);
+        });
     }];
 }
 
@@ -77,55 +79,48 @@
     }
 }
 
-- (void)saveSelectedUsers:(NSArray *)selectedUsers withCompletionHandler:(void(^)(NSError *error))completionHandler {
-    __weak typeof(self) weakSelf = self;
+- (void)saveSelectedUsers:(NSArray *)selectedUsers withCompletionHandler:(void(^)())completionHandler {
+
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(networkStatusDidChange:)
-                                                 name:AKNetworkManagerReachabilityStatusDidChangeNotification
-                                               object:nil];
-    for (AKUser *user in selectedUsers) {
-       
-        [self.downloadQueue addOperationWithBlock:^{
-            NSData *photo = [NSData dataWithContentsOfURL:[NSURL URLWithString:user.photoUrl]];
-            NSData *thumbnail = [NSData dataWithContentsOfURL:[NSURL URLWithString:user.thumbnailUrl]];
-
-            NSString *photoName = [NSString stringWithFormat:@"photo_%@", user.sha256];
-            NSString *thumbnailName = [NSString stringWithFormat:@"thumbnail_%@", user.sha256];
-            
-            [AKStorageManager saveImageData:photo withName:photoName];
-            [AKStorageManager saveImageData:thumbnail withName:thumbnailName];
-            
-            user.photoUrl = photoName;
-            user.thumbnailUrl = thumbnailName;
-            [[AKDatabaseManager sharedManager] saveUsers:@[user]
-                                   withCompletionHandler:^(NSError *error) {
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-//                                           completionHandler(error);
-                                       });
-                                       
-                                   }];
-//            [weakSelf.processedUsers addObject:user];
-        }];
-    }
-//    [self.downloadQueue waitUntilAllOperationsAreFinished];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(networkStatusDidChange:)
+                                                     name:AKNetworkManagerReachabilityStatusDidChangeNotification
+                                                   object:nil];
+        for (AKUser *user in selectedUsers) {
+            AKDownloadOperation *operation = [[AKDownloadOperation alloc] initWithUser:user];
+            operation.name = user.sha256;
+            [self.downloadQueue addOperation:operation];
+        }
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completionHandler(nil);
-        });
+        [self.downloadQueue addObserver:self forKeyPath:@"operations" options:0 context:NULL];
 
-    
-    weakSelf.processedUsers = nil;
     });
+    [[NSNotificationCenter defaultCenter] postNotificationName:AKRandomUsersListModelDidChangeUserHandlingStatusNotification
+                                                        object:@{@"status" : @(DidStartUserHandling)}];
+    completionHandler();
 }
 
-#pragma mark - AKDownloadOperationDelegate
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 
-- (void)downloadOperationDidFinish:(AKDownloadOperation *)operation {
-    NSLog(@"Operation did finish: %@", operation);
-//    NSLog(@"Photo data: %@", operation.photoData);
+    if (object == self.downloadQueue && [keyPath isEqualToString:@"operations"]) {
+        if ([self.downloadQueue.operations count] == 0) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:AKRandomUsersListModelDidChangeUserHandlingStatusNotification
+                                                                object:@{@"status" : @(DidFinishUserHandling)}];
+            if ([self.delegate respondsToSelector:@selector(modelDidFinishHandling:)]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate modelDidFinishHandling:self];
+                });
+            }
+            NSLog(@"queue has completed");
+        }
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object
+                               change:change context:context];
+    }
 }
+
 
 #pragma mark - dealloc
 
