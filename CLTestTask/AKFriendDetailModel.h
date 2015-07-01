@@ -13,6 +13,6 @@
 @interface AKFriendDetailModel : NSObject
 
 - (void)commitChangesForFriend:(AKFriend *)friend;
-- (UIImage *)fetchImageForFilePath:(NSString *)path;
+- (UIImage *)loadImageWithFileName:(NSString *)filename;
 
 @end

@@ -77,13 +77,15 @@
 
 - (void)showFriendLoadingActivityView:(BOOL)show {
     if (show) {
+        [self.activityIndicator startAnimating];
         self.activityViewVerticalConstraint.constant = 0;
-        [self.activityIndicator startAnimating];
+        
     } else {
+        [self.activityIndicator stopAnimating];
         self.activityViewVerticalConstraint.constant = 35.0;
-        [self.activityIndicator startAnimating];
+        
     }
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         [self.view layoutIfNeeded];
     }];
 }
@@ -170,7 +172,7 @@
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"firstName"
                                                                    ascending:YES];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFriend == %@", @(YES)];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFriend == %@", @YES];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];

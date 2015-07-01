@@ -19,6 +19,8 @@
 @property (strong, nonatomic) NSString * phone;
 @property (strong, nonatomic) NSString * thumbnailUrl;
 @property (strong, nonatomic) NSString * photoUrl;
+@property (strong, nonatomic) NSString * photoName;
+@property (strong, nonatomic) NSString * thumbnailName;
 
 
 

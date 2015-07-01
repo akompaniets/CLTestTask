@@ -22,6 +22,7 @@ static CGFloat defaultConstraintConstant = 25.0;
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneField;
+@property (strong, nonatomic)UIBarButtonItem *doneButton;
 
 @property (strong, nonatomic) NSString *tempUserName;
 @property (strong, nonatomic) NSString *tempEmail;
@@ -31,14 +32,16 @@ static CGFloat defaultConstraintConstant = 25.0;
 
 @implementation AKFriendDetailViewController
 {
-//    CGFloat keyboargHeght;
     CGFloat screenHeight;
 }
+
+
+#pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     screenHeight = self.view.frame.size.height;
-    self.userPhoto.image = [self.model fetchImageForFilePath:self.friend.photoPath];
+    self.userPhoto.image = [self.model loadImageWithFileName:self.friend.photoName];
     self.userNameField.text = [NSString stringWithFormat:@"%@.%@ %@", self.friend.title, self.friend.firstName, self.friend.lastName];
     self.emailField.text = self.friend.email;
     self.phoneField.text = self.friend.phone;
@@ -49,36 +52,46 @@ static CGFloat defaultConstraintConstant = 25.0;
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tap];
-    UIFont *buttomFont = [UIFont systemFontOfSize:17.0];
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 60.0f, 30.0f)];
-    [backButton setTitle:NSLocalizedString(@"cancel", nil) forState:UIControlStateNormal];
-    backButton.titleLabel.font = buttomFont;
-    [backButton setTitleColor:NormalButtonColor forState:UIControlStateNormal];
-    [backButton setTitleColor:HighlightedButtonColor forState:UIControlStateHighlighted];
-    [backButton addTarget:self action:@selector(cancelChanges:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    self.navigationItem.leftBarButtonItem = backButtonItem;
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                  target:self
+                                                                                  action:@selector(cancelChanges:)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+
+    self.doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                    target:self
+                                                                    action:@selector(saveUserChanging:)];
+    UIFont *doneButtonFont = [UIFont systemFontOfSize:18.0];
+    [self.doneButton setTitleTextAttributes:@{NSFontAttributeName : doneButtonFont,
+                                              NSForegroundColorAttributeName : NormalButtonColor}
+                                   forState:UIControlStateNormal];
+    [self.doneButton setTitleTextAttributes:@{NSFontAttributeName : doneButtonFont,
+                                              NSForegroundColorAttributeName : DisabledButtonColor}
+                                   forState:UIControlStateDisabled];
+    [self.doneButton setTitleTextAttributes:@{NSFontAttributeName : doneButtonFont,
+                                              NSForegroundColorAttributeName : HighlightedButtonColor}
+                                   forState:UIControlStateHighlighted];
     
-    UIButton *doneButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 60.0f, 30.0f)];
-    [doneButton setTitle:NSLocalizedString(@"done", nil) forState:UIControlStateNormal];
-    doneButton.titleLabel.font = buttomFont;
-    [doneButton setTitleColor:NormalButtonColor forState:UIControlStateNormal];
-    [doneButton setTitleColor:HighlightedButtonColor forState:UIControlStateHighlighted];
-    [doneButton addTarget:self action:@selector(saveUserChanging:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *doneButtonItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    self.navigationItem.rightBarButtonItem = doneButtonItem;
+    self.navigationItem.rightBarButtonItem = self.doneButton;
+    self.doneButton.enabled = NO;
 
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+
+#pragma mark - Actions
+
 - (void)saveUserChanging:(UIBarButtonItem *)sender {
-    NSArray *temp = [self.tempUserName componentsSeparatedByString:@"."];
-    NSString *separetesString = [temp lastObject];
-    NSArray *temp2 = [separetesString componentsSeparatedByString:@" "];
+    NSArray *tempComponents = [self.tempUserName componentsSeparatedByString:@"."];
+    NSString *separetedString = [tempComponents lastObject];
+    NSArray *components = [separetedString componentsSeparatedByString:@" "];
     if (self.tempUserName) {
-        self.friend.title = [temp firstObject];
-        self.friend.firstName = [temp2 firstObject];
-        self.friend.lastName = [temp2 lastObject];
+        self.friend.title = [tempComponents firstObject];
+        self.friend.firstName = [components firstObject];
+        self.friend.lastName = [components lastObject];
     }
     if (self.tempEmail) {
         self.friend.email = self.friend.email;
@@ -96,13 +109,6 @@ static CGFloat defaultConstraintConstant = 25.0;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (AKFriendDetailModel *)model {
-    if (!_model) {
-        _model = [AKFriendDetailModel new];
-    }
-    return _model;
-}
-
 - (void) addTargetForTextField:(UITextField *)textField
 {
     [textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
@@ -116,19 +122,15 @@ static CGFloat defaultConstraintConstant = 25.0;
     [self animateConstraint];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 - (void)animateConstraint {
     [UIView animateWithDuration:0.5 animations:^{
         [self.view layoutIfNeeded];
     }];
 }
 
-- (void) textFieldDidChange:(UITextField *)textField {
+- (void)textFieldDidChange:(UITextField *)textField {
+    
+    self.doneButton.enabled = YES;
     switch (textField.tag)
     {
         case 100:
@@ -146,6 +148,16 @@ static CGFloat defaultConstraintConstant = 25.0;
     }
 }
 
+
+#pragma mark - Getters
+
+- (AKFriendDetailModel *)model {
+    if (!_model) {
+        _model = [AKFriendDetailModel new];
+    }
+    return _model;
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -160,7 +172,6 @@ static CGFloat defaultConstraintConstant = 25.0;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
     if (textField.tag != 102) {
         UIResponder* nextResponder = [textField.superview viewWithTag:(textField.tag + 1)];
         if (nextResponder) {
@@ -173,7 +184,6 @@ static CGFloat defaultConstraintConstant = 25.0;
         }
         [textField resignFirstResponder];
     }
-    
     
     return YES;
 }

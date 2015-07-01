@@ -23,7 +23,7 @@
     }
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        NSData *imagedata = [AKStorageManager loadImageDataForFileName:friend.thumbnailPath];
+        NSData *imagedata = [AKStorageManager loadImageDataForFileName:friend.thumbnailName];
         UIImage *image = [UIImage imageWithData:imagedata];
         
         if (image) {

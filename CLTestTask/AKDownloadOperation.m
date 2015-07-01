@@ -41,8 +41,8 @@
         [AKStorageManager saveImageData:photo withName:photoName];
         [AKStorageManager saveImageData:thumbnail withName:thumbnailName];
         
-        self.user.photoUrl = photoName;
-        self.user.thumbnailUrl = thumbnailName;
+        self.user.photoName = photoName;
+        self.user.thumbnailName = thumbnailName;
         
         [[AKDatabaseManager sharedManager] saveUsers:@[self.user]
                                withCompletionHandler:nil];

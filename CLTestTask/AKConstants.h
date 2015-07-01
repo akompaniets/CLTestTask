@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, UserHandlingStatus) {
 #define isNetworkAvailable [[AKNetworkManager sharedManager] reachability].isReachable
 #define NormalButtonColor [UIColor colorWithRed:0 green:122.0/255. blue:255.0/255. alpha:1.0]
 #define HighlightedButtonColor [UIColor colorWithRed:198./255. green:222.0/255. blue:249.0/255. alpha:1.0]
+#define DisabledButtonColor [UIColor colorWithRed:196./255. green:196.0/255. blue:196.0/255. alpha:1.0]
 
 @interface AKConstants : NSObject
 

@@ -105,19 +105,17 @@
 
     if (object == self.downloadQueue && [keyPath isEqualToString:@"operations"]) {
         if ([self.downloadQueue.operations count] == 0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:AKRandomUsersListModelDidChangeUserHandlingStatusNotification
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:AKRandomUsersListModelDidChangeUserHandlingStatusNotification
                                                                 object:@{@"status" : @(DidFinishUserHandling)}];
-            if ([self.delegate respondsToSelector:@selector(modelDidFinishHandling:)]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.delegate modelDidFinishHandling:self];
-                });
-            }
-            NSLog(@"queue has completed");
+#if DEBUG
+                NSLog(@"queue has completed");
+#endif
+            });
         }
     }
     else {
-        [super observeValueForKeyPath:keyPath ofObject:object
-                               change:change context:context];
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
 

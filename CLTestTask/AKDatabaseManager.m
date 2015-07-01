@@ -103,29 +103,8 @@
     request.resultType = NSManagedObjectResultType;
     
     AKFriend *fetchedFriend = [self.mainContext executeFetchRequest:request error:nil].firstObject;
-    fetchedFriend.isFriend = @(NO);
-//    [self.mainContext refreshObject:fetchedFriend mergeChanges:YES];
-//        NSEntityDescription *desc = [NSEntityDescription entityForName:@"AKFriend" inManagedObjectContext:self.mainContext];
-//        NSBatchUpdateRequest *request = [[NSBatchUpdateRequest alloc] initWithEntity:desc];
-//        request.predicate = [NSPredicate predicateWithFormat:@"sha256 == %@", friend.sha256];
-//        request.propertiesToUpdate = @{@"isFriend" : @(NO)};
-//        request.resultType = NSUpdatedObjectIDsResultType;
-//        NSError *requestError;
-//        NSBatchUpdateResult *result = (NSBatchUpdateResult *)[self.writerContext executeRequest:request error:&requestError];
-//        
-//        NSArray *resultObjects = result.result;
-//        for (NSManagedObjectID *fetchedObject in resultObjects) {
-//            NSManagedObject *ob = [self.mainContext objectRegisteredForID:fetchedObject];
-//            if (ob) {
-//                [self.mainContext refreshObject:ob mergeChanges:YES];
-//            }
-//            
-//        }
-//#if DEBUG
-//        NSLog(@"Update for row: %@\n Error: %@", friend.sha256, [requestError localizedDescription]);
-//#endif
-        [self saveContextWithCallback:nil];
-//    });
+    fetchedFriend.isFriend = @NO;
+    [self saveContextWithCallback:nil];
 }
 
 - (void)saveUsers:(NSArray *)users withCompletionHandler:(void(^)(NSError *error))completionHandler {
@@ -142,8 +121,8 @@
         friend.sha256 = currentUser.sha256;
         friend.email = currentUser.email;
         friend.phone = currentUser.phone;
-        friend.thumbnailPath = currentUser.thumbnailUrl;
-        friend.photoPath = currentUser.photoUrl;
+        friend.thumbnailName = currentUser.thumbnailName;
+        friend.photoName = currentUser.thumbnailName;
         friend.isFriend = @(YES);
     }
     

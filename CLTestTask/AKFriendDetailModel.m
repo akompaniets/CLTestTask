@@ -16,8 +16,8 @@
     [[AKDatabaseManager sharedManager] updateChangesForFriend:friend];
 }
 
-- (UIImage *)fetchImageForFilePath:(NSString *)path {
-    NSData *imageData = [AKStorageManager loadImageDataForFileName:path];
+- (UIImage *)loadImageWithFileName:(NSString *)filename {
+    NSData *imageData = [AKStorageManager loadImageDataForFileName:filename];
     UIImage *image = [UIImage imageWithData:imageData];
     
     return image;
