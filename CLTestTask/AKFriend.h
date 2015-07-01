@@ -21,5 +21,7 @@
 @property (nonatomic, retain) NSString * sha256;
 @property (nonatomic, retain) NSString * thumbnailName;
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSString * photoURL;
+@property (nonatomic, retain) NSString * thumbnailURL;
 
 @end

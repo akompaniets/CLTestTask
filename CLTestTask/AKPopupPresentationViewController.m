@@ -8,7 +8,7 @@
 
 #import "AKPopupPresentationViewController.h"
 
-static CGFloat duration = 0.3f;
+static CGFloat animationDuration = 0.3f;
 
 @interface AKPopupPresentationViewController ()
 
@@ -19,10 +19,6 @@ static CGFloat duration = 0.3f;
 @end
 
 @implementation AKPopupPresentationViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
 
 - (void)showPopupViewController:(UIViewController *)viewController {
     
@@ -58,14 +54,14 @@ static CGFloat duration = 0.3f;
     [self.view layoutIfNeeded];
     
     self.verticalPosConstraint.constant = 0;
-    [UIView animateWithDuration:duration animations:^{
+    [UIView animateWithDuration:animationDuration animations:^{
         [self.view layoutIfNeeded];
     }];
 }
 
 - (void)hidePopupViewController {
     self.verticalPosConstraint.constant = -self.height;
-    [UIView animateWithDuration:duration animations:^{
+    [UIView animateWithDuration:animationDuration animations:^{
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self.popupViewController.view removeFromSuperview];
@@ -73,7 +69,6 @@ static CGFloat duration = 0.3f;
         self.popupViewController = nil;
         self.verticalPosConstraint = nil;
     }];
-    
 }
 
 @end

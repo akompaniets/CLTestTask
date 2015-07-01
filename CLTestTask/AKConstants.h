@@ -34,6 +34,6 @@ extern NSString *URL;
 extern NSString *AKNetworkManagerReachabilityStatusDidChangeNotification;
 extern NSString *AKRandomUsersListModelDidChangeUserHandlingStatusNotification;
 extern NSString *FriendDetailSegue;
-extern NSString *FriendDetailSegue;
+extern NSString *PlaceholderImage;
 
 @end

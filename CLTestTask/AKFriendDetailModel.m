@@ -9,6 +9,8 @@
 #import "AKFriendDetailModel.h"
 #import "AKDatabaseManager.h"
 #import "AKStorageManager.h"
+#import "AKNetworkManager.h"
+#import "AKFriend.h"
 
 @implementation AKFriendDetailModel
 
@@ -20,7 +22,39 @@
     NSData *imageData = [AKStorageManager loadImageDataForFileName:filename];
     UIImage *image = [UIImage imageWithData:imageData];
     
-    return image;
+    return image ? image : nil;
 }
+
+- (void)reloadPhotoForFriend:(AKFriend *)friend withCompletionHandler:(void(^)(UIImage *image))completionHandler {
+    
+    NSOperationQueue *updateFriendQueue = [[NSOperationQueue alloc] init];
+    updateFriendQueue.name = @"DownloadPhoto Queue";
+    updateFriendQueue.maxConcurrentOperationCount = 1;
+    if ([[AKNetworkManager sharedManager] reachability].isReachable) {
+        [updateFriendQueue addOperationWithBlock:^{
+            NSData *photoData = [NSData dataWithContentsOfURL:[NSURL URLWithString:friend.photoURL]];
+            NSData *thumbnailData = [NSData dataWithContentsOfURL:[NSURL URLWithString:friend.thumbnailURL]];
+            UIImage *photo = [UIImage imageWithData:photoData];
+            AKFriend *updatedFriend = friend;
+            NSString *photoName = [NSString stringWithFormat:@"photo_%@", friend.sha256];
+            NSString *thumbnailName = [NSString stringWithFormat:@"thumbnail_%@", friend.sha256];
+            
+            [AKStorageManager saveImageData:photoData withName:photoName];
+            [AKStorageManager saveImageData:thumbnailData withName:thumbnailName];
+            
+            updatedFriend.photoName = photoName;
+            updatedFriend.thumbnailName = thumbnailName;
+            
+            [[AKDatabaseManager sharedManager] updateChangesForFriend:updatedFriend];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionHandler(photo);
+            });
+        }];
+    } else {
+        completionHandler(nil);
+    }
+}
+
 
 @end

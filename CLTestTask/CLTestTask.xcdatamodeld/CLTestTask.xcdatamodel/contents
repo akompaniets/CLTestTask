@@ -7,11 +7,13 @@
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photoName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photoURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sha256" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbnailName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbnailURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AKFriend" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="AKFriend" positionX="-63" positionY="-18" width="128" height="210"/>
     </elements>
 </model>

@@ -14,5 +14,5 @@ NSString *URL                                                               = @"
 NSString *AKNetworkManagerReachabilityStatusDidChangeNotification           = @"AKNetworkManagerReachabilityStatusDidChangeNotification";
 NSString *AKRandomUsersListModelDidChangeUserHandlingStatusNotification     = @"AKRandomUsersListModelDidChangeUserHandlingStatusNotification";
 NSString *FriendDetailSegue                                                 = @"friendDetailSegue";
-
+NSString *PlaceholderImage                                                  = @"placeholderImage";
 @end

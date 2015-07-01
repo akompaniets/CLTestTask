@@ -87,7 +87,7 @@
 }
 
 
-#pragma mark -
+#pragma mark - Getters
 
 - (NSMutableIndexSet *)selectedIndexes {
     if (!_selectedIndexes) {

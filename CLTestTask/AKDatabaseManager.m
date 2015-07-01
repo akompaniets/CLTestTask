@@ -14,15 +14,15 @@
 
 @interface AKDatabaseManager()
 
-@property (strong, nonatomic) NSManagedObjectContext *writerContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (strong, nonatomic) NSManagedObjectContext *mainContext;
 
 @end
 
 @implementation AKDatabaseManager
 
-#pragma mark - Core Data stack
+
 
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -36,6 +36,8 @@
     
     return manager;
 }
+
+#pragma mark - Core Data stack
 
 - (NSURL *)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
@@ -53,22 +55,22 @@
 - (NSManagedObjectContext *)mainContext {
     if (!_mainContext) {
         _mainContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        _mainContext.parentContext = self.writerContext;
+        _mainContext.parentContext = self.backgroundContext;
     }
     return _mainContext;
 }
 
-- (NSManagedObjectContext *)writerContext {
-    if (!_writerContext) {
-        _writerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+- (NSManagedObjectContext *)backgroundContext {
+    if (!_backgroundContext) {
+        _backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
         if (!coordinator) {
             return nil;
         }
-        _writerContext.persistentStoreCoordinator = coordinator;
+        _backgroundContext.persistentStoreCoordinator = coordinator;
     }
     
-    return _writerContext;
+    return _backgroundContext;
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
@@ -85,7 +87,7 @@
         dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
         dict[NSLocalizedFailureReasonErrorKey] = failureReason;
         dict[NSUnderlyingErrorKey] = error;
-        error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
+        error = [NSError errorWithDomain:@"CLTestTask_ERROR_DOMAIN" code:777 userInfo:dict];
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
@@ -123,7 +125,9 @@
         friend.phone = currentUser.phone;
         friend.thumbnailName = currentUser.thumbnailName;
         friend.photoName = currentUser.thumbnailName;
-        friend.isFriend = @(YES);
+        friend.thumbnailURL = currentUser.thumbnailUrl;
+        friend.photoURL = currentUser.photoUrl;
+        friend.isFriend = @YES;
     }
     
     [self saveContextWithCallback:^(NSError *error) {
@@ -139,7 +143,7 @@
     request.predicate = [NSPredicate predicateWithFormat:@"sha256 == %@", user.sha256];
     request.resultType = NSCountResultType;
     NSInteger matches = 0;
-    matches = [[self.mainContext executeFetchRequest:request error:nil].firstObject integerValue];
+    matches = [[self.backgroundContext executeFetchRequest:request error:nil].firstObject integerValue];
     if (matches > 0) {
         return YES;
     }
@@ -152,11 +156,13 @@
     request.predicate = [NSPredicate predicateWithFormat:@"sha256 == %@", friend.sha256];
     request.resultType = NSManagedObjectResultType;
     
-    AKFriend *fetchedFriend = [self.mainContext executeFetchRequest:request error:nil].firstObject;
+    AKFriend *fetchedFriend = [self.backgroundContext executeFetchRequest:request error:nil].firstObject;
     fetchedFriend.firstName = friend.firstName;
     fetchedFriend.lastName = friend.lastName;
     fetchedFriend.email = friend.email;
     fetchedFriend.phone = friend.phone;
+    fetchedFriend.thumbnailName = friend.thumbnailName;
+    fetchedFriend.photoName = friend.photoName;
 
     [self saveContextWithCallback:nil];
     
@@ -179,12 +185,12 @@
     
     __block NSError *error = nil;
 
-    [self.writerContext performBlockAndWait:^{
+    [self.backgroundContext performBlockAndWait:^{
         
-        if ([weakSelf.writerContext save:&error])
+        if ([weakSelf.backgroundContext save:&error])
         {
 #if DEBUG
-            NSLog(@"%@", error ? [error localizedDescription] : @"Writer Context Saved!");
+            NSLog(@"%@", error ? [error localizedDescription] : @"Background Context Saved!");
 #endif
         };
     }];

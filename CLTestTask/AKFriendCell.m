@@ -12,14 +12,17 @@
 
 @implementation AKFriendCell
 
-//@synthesize imageCache = _imageCache;
++ (NSString *)cellIdentifier {
+    return NSStringFromClass([self class]);
+}
 
 - (void)configureCellForFriend:(AKFriend *)friend {
 
     self.userName.text = [NSString stringWithFormat:@"%@.%@ %@", friend.title, friend.firstName, friend.lastName];
     self.userName.font = CustomFont;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     if (![self.imageCache objectForKey:friend.sha256]) {
-        self.userImage.image = [UIImage imageNamed:@"didntLoad"];
+        self.userImage.image = [UIImage imageNamed:PlaceholderImage];
     }
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -34,17 +37,12 @@
         }
     });
     
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     
 }
 
 - (NSCache *)imageCache {
-
     return [super imageCache];
-}
-
-+ (NSString *)cellIdentifier {
-    return NSStringFromClass([self class]);
 }
 
 @end

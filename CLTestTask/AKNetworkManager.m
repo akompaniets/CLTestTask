@@ -24,8 +24,9 @@
         [manager.reachability setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
            
             [[NSNotificationCenter defaultCenter] postNotificationName:AKNetworkManagerReachabilityStatusDidChangeNotification object:@{@"status" : @(status)}];
-           
+#if DEBUG
             NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+#endif
         }];
         [manager.reachability startMonitoring];
     });
@@ -37,27 +38,11 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                                                    NSLog(@"JSON: %@", responseObject);
                                                     callback(responseObject,nil);
                                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                    NSLog(@"Error: %@", error);
+                                                    NSLog(@"Error: %@", [error localizedDescription]);
                                                     callback(nil,error);
                                             }];
-//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-//    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:URL]];
-//    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-//    
-//        if (error) {
-//            NSLog(@"Error: %@", error);
-//            callback(nil, error);
-//        } else {
-////            NSLog(@"%@ %@", response, responseObject);
-//            callback(responseObject, nil);
-//        }
-//        [dataTask cancel];
-//    }];
-//    [dataTask resume];
 }
 
 @end

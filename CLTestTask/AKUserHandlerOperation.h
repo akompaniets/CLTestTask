@@ -10,7 +10,7 @@
 
 @class AKUser;
 
-@interface AKDownloadOperation : NSOperation
+@interface AKUserHandlerOperation : NSOperation
 
 @property (strong, nonatomic) NSData *thumbnailData;
 @property (strong, nonatomic) NSData *photoData;

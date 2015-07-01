@@ -20,5 +20,7 @@
 @dynamic sha256;
 @dynamic thumbnailName;
 @dynamic title;
+@dynamic photoURL;
+@dynamic thumbnailURL;
 
 @end

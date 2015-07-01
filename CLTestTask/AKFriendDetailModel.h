@@ -14,5 +14,6 @@
 
 - (void)commitChangesForFriend:(AKFriend *)friend;
 - (UIImage *)loadImageWithFileName:(NSString *)filename;
+- (void)reloadPhotoForFriend:(AKFriend *)friend withCompletionHandler:(void(^)(UIImage *image))completionHandler;
 
 @end

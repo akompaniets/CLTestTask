@@ -12,7 +12,7 @@
 #import "AKMappingProvider.h"
 #import "AKUser.h"
 #import <FEMObjectDeserializer.h>
-#import "AKDownloadOperation.h"
+#import "AKUserHandlerOperation.h"
 #import "AKStorageManager.h"
 
 @interface AKRandomUsersListModel() 
@@ -33,6 +33,8 @@
     return model;
 }
 
+#pragma mark - Actions
+
 - (void)fetchNewUserListWithCallback:(void(^)(NSArray *newUsers, NSError *error))callback {
     AKNetworkManager *manager = [AKNetworkManager sharedManager];
     
@@ -50,22 +52,6 @@
     }];
 }
 
-- (NSMutableArray *)processedUsers {
-    if (!_processedUsers) {
-        _processedUsers = [NSMutableArray array];
-    }
-    return _processedUsers;
-}
-
-- (NSOperationQueue *)downloadQueue {
-    if (!_downloadQueue) {
-        _downloadQueue = [NSOperationQueue new];
-        _downloadQueue.name = @"Download Queue";
-        _downloadQueue.maxConcurrentOperationCount = 1;
-    }
-    return _downloadQueue;
-}
-
 - (void)networkStatusDidChange:(NSNotification *)notification {
     NSInteger status = [[[notification object] objectForKey:@"status"] integerValue];
     if (status == 0) {
@@ -80,7 +66,7 @@
 }
 
 - (void)saveSelectedUsers:(NSArray *)selectedUsers withCompletionHandler:(void(^)())completionHandler {
-
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -88,26 +74,28 @@
                                                      name:AKNetworkManagerReachabilityStatusDidChangeNotification
                                                    object:nil];
         for (AKUser *user in selectedUsers) {
-            AKDownloadOperation *operation = [[AKDownloadOperation alloc] initWithUser:user];
+            AKUserHandlerOperation *operation = [[AKUserHandlerOperation alloc] initWithUser:user];
             operation.name = user.sha256;
             [self.downloadQueue addOperation:operation];
         }
         
         [self.downloadQueue addObserver:self forKeyPath:@"operations" options:0 context:NULL];
-
+        
     });
-    [[NSNotificationCenter defaultCenter] postNotificationName:AKRandomUsersListModelDidChangeUserHandlingStatusNotification
-                                                        object:@{@"status" : @(DidStartUserHandling)}];
-    completionHandler();
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:AKRandomUsersListModelDidChangeUserHandlingStatusNotification
+                                                            object:@{@"status" : @(DidStartUserHandling)}];
+        completionHandler();
+    });
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-
+    
     if (object == self.downloadQueue && [keyPath isEqualToString:@"operations"]) {
         if ([self.downloadQueue.operations count] == 0) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:AKRandomUsersListModelDidChangeUserHandlingStatusNotification
-                                                                object:@{@"status" : @(DidFinishUserHandling)}];
+                                                                    object:@{@"status" : @(DidFinishUserHandling)}];
 #if DEBUG
                 NSLog(@"queue has completed");
 #endif
@@ -117,6 +105,25 @@
     else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
+}
+
+
+#pragma mark - Getters
+
+- (NSMutableArray *)processedUsers {
+    if (!_processedUsers) {
+        _processedUsers = [NSMutableArray array];
+    }
+    return _processedUsers;
+}
+
+- (NSOperationQueue *)downloadQueue {
+    if (!_downloadQueue) {
+        _downloadQueue = [NSOperationQueue new];
+        _downloadQueue.name = @"Download Queue";
+        _downloadQueue.maxConcurrentOperationCount = 1;
+    }
+    return _downloadQueue;
 }
 
 

@@ -16,5 +16,4 @@
 + (instancetype)sharedManager;
 - (void)fetchRandomUsersWithCallback:(void(^)(id usersData, NSError *error))callback;
 
-
 @end

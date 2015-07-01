@@ -41,7 +41,26 @@ static CGFloat defaultConstraintConstant = 25.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     screenHeight = self.view.frame.size.height;
-    self.userPhoto.image = [self.model loadImageWithFileName:self.friend.photoName];
+    UIImage *userImage = [self.model loadImageWithFileName:self.friend.photoName];
+    if (userImage) {
+        self.userPhoto.image = userImage;
+    }else {
+        self.userPhoto.image = [UIImage imageNamed:PlaceholderImage];
+        [self.model reloadPhotoForFriend:self.friend withCompletionHandler:^(UIImage *image) {
+            if (image) {
+                self.userPhoto.image = image;
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"warning", nil)
+                                                                message:NSLocalizedString(@"error_downloading_photo", nil)
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil, nil];
+                [alert show];
+            }
+            
+        }];
+    }
+    
     self.userNameField.text = [NSString stringWithFormat:@"%@.%@ %@", self.friend.title, self.friend.firstName, self.friend.lastName];
     self.emailField.text = self.friend.email;
     self.phoneField.text = self.friend.phone;
@@ -94,7 +113,7 @@ static CGFloat defaultConstraintConstant = 25.0;
         self.friend.lastName = [components lastObject];
     }
     if (self.tempEmail) {
-        self.friend.email = self.friend.email;
+        self.friend.email = self.tempEmail;
     }
     if (self.tempPhone) {
         self.friend.phone = self.tempPhone;
@@ -123,7 +142,7 @@ static CGFloat defaultConstraintConstant = 25.0;
 }
 
 - (void)animateConstraint {
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         [self.view layoutIfNeeded];
     }];
 }

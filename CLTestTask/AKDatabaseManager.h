@@ -12,10 +12,11 @@
 @class AKFriend;
 @interface AKDatabaseManager : NSObject
 
-@property (strong, nonatomic) NSManagedObjectContext *mainContext;
+@property (strong, nonatomic) NSManagedObjectContext *backgroundContext;
 
 + (instancetype)sharedManager;
 - (void)saveUsers:(NSArray *)users withCompletionHandler:(void(^)(NSError *error))completionHandler;
 - (void)markFriendAsNonFriend:(AKFriend *)friend;
 - (void)updateChangesForFriend:(AKFriend *)friend;
+
 @end

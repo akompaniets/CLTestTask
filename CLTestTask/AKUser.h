@@ -10,7 +10,6 @@
 
 @interface AKUser : NSObject
 
-
 @property (strong, nonatomic) NSString * title;
 @property (strong, nonatomic) NSString * firstName;
 @property (strong, nonatomic) NSString * lastName;
@@ -21,7 +20,5 @@
 @property (strong, nonatomic) NSString * photoUrl;
 @property (strong, nonatomic) NSString * photoName;
 @property (strong, nonatomic) NSString * thumbnailName;
-
-
 
 @end

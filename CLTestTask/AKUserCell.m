@@ -30,12 +30,12 @@
     self.userName.text = [NSString stringWithFormat:@"%@.%@ %@", user.title, user.firstName, user.lastName];
     self.userName.font = CustomFont;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    NSString *imageKey = [NSString stringWithFormat:@"cell%ld", indexPath.row];
+    NSString *imageKey = [NSString stringWithFormat:@"cell%d", indexPath.row];
     UIImage *cachedImage = [self.imageCache objectForKey:imageKey];
     if (cachedImage) {
         self.userImage.image = cachedImage;
     } else {
-        self.userImage.image = [UIImage imageNamed:@"didntLoad"];
+        self.userImage.image = [UIImage imageNamed:PlaceholderImage];
         __weak typeof(self) weakSelf = self;
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:user.thumbnailUrl]];

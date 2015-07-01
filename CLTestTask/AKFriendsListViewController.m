@@ -26,7 +26,6 @@
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
-
 @end
 
 @implementation AKFriendsListViewController
@@ -59,6 +58,9 @@
         [alert show];
     }    
 }
+
+
+#pragma mark - Getters
 
 - (AKFriendsListModel *)model {
     if (!_model) {
@@ -151,7 +153,7 @@
 {
     if (!_managedObjectContext)
     {
-        _managedObjectContext = [[AKDatabaseManager sharedManager] mainContext];
+        _managedObjectContext = [[AKDatabaseManager sharedManager] backgroundContext];
     }
     return _managedObjectContext;
 }
@@ -161,7 +163,6 @@
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
-   
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"AKFriend"
@@ -191,6 +192,7 @@
             NSLog(@"Fetching error %@, %@", error, [error userInfo]);
             abort();
         }
+
 
     return _fetchedResultsController;
 }

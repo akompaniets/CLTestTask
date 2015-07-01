@@ -14,3 +14,4 @@
 "cancel" = "Cancel";
 "message" = "Message!";
 "empty_friend_list" = "There isn't any friend in your list. Please tap plus button to add someone.";
+"error_downloading_photo" = "Probably Internet currently is unavailable. Friend's photo will be downloaded in next time.";

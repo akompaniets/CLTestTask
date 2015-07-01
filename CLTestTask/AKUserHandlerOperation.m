@@ -6,21 +6,21 @@
 //  Copyright (c) 2015 ARC. All rights reserved.
 //
 
-#import "AKDownloadOperation.h"
+#import "AKUserHandlerOperation.h"
 #import "AKUser.h"
 #import "AKStorageManager.h"
 #import "AKDatabaseManager.h"
 
-@interface AKDownloadOperation()
+@interface AKUserHandlerOperation()
 
 @property (strong, nonatomic) NSString *thumbnailURL;
 @property (strong, nonatomic) NSString *photoURL;
 @property (strong, nonatomic) AKUser *user;
 
-
 @end
 
-@implementation AKDownloadOperation
+@implementation AKUserHandlerOperation
+
 - (instancetype)initWithUser:(AKUser *)user {
     self = [super init];
     if (self) {

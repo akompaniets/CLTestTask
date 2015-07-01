@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		496D45311B413248003DD784 /* AKDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 496D45301B413248003DD784 /* AKDownloadOperation.m */; };
+		496D45311B413248003DD784 /* AKUserHandlerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 496D45301B413248003DD784 /* AKUserHandlerOperation.m */; };
 		DFAA34FC1B3C3AE1004BC7CD /* AKFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAA34FB1B3C3AE1004BC7CD /* AKFriendCell.m */; };
 		DFAA34FF1B3C41BC004BC7CD /* AKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAA34FE1B3C41BC004BC7CD /* AKUser.m */; };
 		DFAA35041B3D43D6004BC7CD /* HelveticaNeue-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFAA35031B3D43D6004BC7CD /* HelveticaNeue-Light.ttf */; };
 		DFAA35081B3D4B1F004BC7CD /* AKStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAA35071B3D4B1F004BC7CD /* AKStorageManager.m */; };
-		DFAAB8B91B43DCE7003E4811 /* AKFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAAB8B81B43DCE7003E4811 /* AKFriend.m */; };
+		DFAAB8BF1B43F2BB003E4811 /* AKFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAAB8BE1B43F2BB003E4811 /* AKFriend.m */; };
 		DFAB37381B380CBD00CFB161 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAB37371B380CBD00CFB161 /* main.m */; };
 		DFAB373B1B380CBD00CFB161 /* AKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DFAB373A1B380CBD00CFB161 /* AKAppDelegate.m */; };
 		DFAB373E1B380CBD00CFB161 /* CLTestTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DFAB373C1B380CBD00CFB161 /* CLTestTask.xcdatamodeld */; };
@@ -49,8 +49,8 @@
 /* Begin PBXFileReference section */
 		1563A2976779CFC72E65ECEA /* Pods-CLTestTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLTestTask.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CLTestTask/Pods-CLTestTask.debug.xcconfig"; sourceTree = "<group>"; };
 		30CF7C2C04597DD8C53FE82D /* Pods-CLTestTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLTestTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-CLTestTask/Pods-CLTestTask.release.xcconfig"; sourceTree = "<group>"; };
-		496D452F1B413248003DD784 /* AKDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKDownloadOperation.h; sourceTree = "<group>"; };
-		496D45301B413248003DD784 /* AKDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKDownloadOperation.m; sourceTree = "<group>"; };
+		496D452F1B413248003DD784 /* AKUserHandlerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKUserHandlerOperation.h; sourceTree = "<group>"; };
+		496D45301B413248003DD784 /* AKUserHandlerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKUserHandlerOperation.m; sourceTree = "<group>"; };
 		8F48A470B52EDF9A335A9383 /* libPods-CLTestTask.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLTestTask.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFAA34FA1B3C3AE1004BC7CD /* AKFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFriendCell.h; sourceTree = "<group>"; };
 		DFAA34FB1B3C3AE1004BC7CD /* AKFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFriendCell.m; sourceTree = "<group>"; };
@@ -59,8 +59,8 @@
 		DFAA35031B3D43D6004BC7CD /* HelveticaNeue-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Light.ttf"; sourceTree = "<group>"; };
 		DFAA35061B3D4B1F004BC7CD /* AKStorageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKStorageManager.h; sourceTree = "<group>"; };
 		DFAA35071B3D4B1F004BC7CD /* AKStorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKStorageManager.m; sourceTree = "<group>"; };
-		DFAAB8B71B43DCE7003E4811 /* AKFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFriend.h; sourceTree = "<group>"; };
-		DFAAB8B81B43DCE7003E4811 /* AKFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFriend.m; sourceTree = "<group>"; };
+		DFAAB8BD1B43F2BB003E4811 /* AKFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFriend.h; sourceTree = "<group>"; };
+		DFAAB8BE1B43F2BB003E4811 /* AKFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFriend.m; sourceTree = "<group>"; };
 		DFAB37321B380CBD00CFB161 /* CLTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFAB37361B380CBD00CFB161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DFAB37371B380CBD00CFB161 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -218,8 +218,8 @@
 			children = (
 				DFAA34FD1B3C41BC004BC7CD /* AKUser.h */,
 				DFAA34FE1B3C41BC004BC7CD /* AKUser.m */,
-				496D452F1B413248003DD784 /* AKDownloadOperation.h */,
-				496D45301B413248003DD784 /* AKDownloadOperation.m */,
+				496D452F1B413248003DD784 /* AKUserHandlerOperation.h */,
+				496D45301B413248003DD784 /* AKUserHandlerOperation.m */,
 			);
 			name = "Support Classes";
 			sourceTree = "<group>";
@@ -291,8 +291,8 @@
 		DFFD76AA1B3828850026EFD8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DFAAB8B71B43DCE7003E4811 /* AKFriend.h */,
-				DFAAB8B81B43DCE7003E4811 /* AKFriend.m */,
+				DFAAB8BD1B43F2BB003E4811 /* AKFriend.h */,
+				DFAAB8BE1B43F2BB003E4811 /* AKFriend.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -458,7 +458,7 @@
 				DFFD76931B38225D0026EFD8 /* AKFriendsListModel.m in Sources */,
 				DFFD76B21B383A9E0026EFD8 /* AKPopupPresentationViewController.m in Sources */,
 				DFAB373B1B380CBD00CFB161 /* AKAppDelegate.m in Sources */,
-				DFAAB8B91B43DCE7003E4811 /* AKFriend.m in Sources */,
+				DFAAB8BF1B43F2BB003E4811 /* AKFriend.m in Sources */,
 				DFFD76AE1B3828D00026EFD8 /* AKUserCell.m in Sources */,
 				DFAA34FC1B3C3AE1004BC7CD /* AKFriendCell.m in Sources */,
 				DFFD76A91B38287A0026EFD8 /* AKDatabaseManager.m in Sources */,
@@ -467,7 +467,7 @@
 				DFFD76A01B38241B0026EFD8 /* AKRandomUsersListViewController.m in Sources */,
 				DFFD76901B38223B0026EFD8 /* AKFriendsListViewController.m in Sources */,
 				DFFD76A61B3828650026EFD8 /* AKNetworkManager.m in Sources */,
-				496D45311B413248003DD784 /* AKDownloadOperation.m in Sources */,
+				496D45311B413248003DD784 /* AKUserHandlerOperation.m in Sources */,
 				DFFD768C1B3821100026EFD8 /* AKConstants.m in Sources */,
 				DFFD769D1B3823D00026EFD8 /* AKFriendDetailModel.m in Sources */,
 				DFAB37381B380CBD00CFB161 /* main.m in Sources */,
