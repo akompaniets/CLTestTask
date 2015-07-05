@@ -8,12 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, AKAlertViewSeverity) {
-    AKAlertViewSeverityError = 0,
-    AKAlertViewSeverityWarning = 1,
-    AKAlertViewSeveritySuccess = 2
-};
-
 typedef NS_ENUM(NSInteger, UserHandlingStatus) {
     DidStartUserHandling = 0,
     DidFinishUserHandling = 1,
