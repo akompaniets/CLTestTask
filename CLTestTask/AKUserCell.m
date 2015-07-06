@@ -8,6 +8,7 @@
 
 #import "AKUserCell.h"
 #import "AKUser.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface AKUserCell()
 
@@ -30,24 +31,8 @@
     self.userName.text = [NSString stringWithFormat:@"%@.%@ %@", user.title, user.firstName, user.lastName];
     self.userName.font = CustomFont;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    NSString *imageKey = [NSString stringWithFormat:@"cell%d", indexPath.row];
-    UIImage *cachedImage = [self.imageCache objectForKey:imageKey];
-    if (cachedImage) {
-        self.userImage.image = cachedImage;
-    } else {
-        self.userImage.image = [UIImage imageNamed:PlaceholderImage];
-        __weak typeof(self) weakSelf = self;
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:user.thumbnailUrl]];
-            UIImage *image = [UIImage imageWithData:imageData];
-            if (image) {
-                [weakSelf.imageCache setObject:image forKey:imageKey];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    weakSelf.userImage.image = image;
-                });
-            }
-        });
-    }
+    [self.userImage setImageWithURL:[NSURL URLWithString:user.thumbnailUrl]
+                   placeholderImage:[UIImage imageNamed:PlaceholderImage]];
 }
 
 @end

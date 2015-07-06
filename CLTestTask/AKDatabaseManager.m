@@ -16,6 +16,7 @@
 
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (strong, nonatomic) NSManagedObjectContext *writerContext;
 @property (strong, nonatomic) NSManagedObjectContext *mainContext;
 
 @end
@@ -55,21 +56,29 @@
 - (NSManagedObjectContext *)mainContext {
     if (!_mainContext) {
         _mainContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        _mainContext.parentContext = self.backgroundContext;
+        _mainContext.parentContext = self.writerContext;
     }
     return _mainContext;
+}
+
+- (NSManagedObjectContext *)writerContext {
+    if (!_writerContext) {
+        _writerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+        if (!coordinator) {
+            return nil;
+        }
+        _writerContext.persistentStoreCoordinator = coordinator;
+    }
+    
+    return _writerContext;
 }
 
 - (NSManagedObjectContext *)backgroundContext {
     if (!_backgroundContext) {
         _backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-        if (!coordinator) {
-            return nil;
-        }
-        _backgroundContext.persistentStoreCoordinator = coordinator;
+        _backgroundContext.parentContext = self.mainContext;
     }
-    
     return _backgroundContext;
 }
 
@@ -104,7 +113,7 @@
     request.predicate = [NSPredicate predicateWithFormat:@"sha256 == %@", friend.sha256];
     request.resultType = NSManagedObjectResultType;
     
-    AKFriend *fetchedFriend = [self.mainContext executeFetchRequest:request error:nil].firstObject;
+    AKFriend *fetchedFriend = [self.backgroundContext executeFetchRequest:request error:nil].firstObject;
     fetchedFriend.isFriend = @NO;
     [self saveContextWithCallback:nil];
 }
@@ -143,7 +152,7 @@
     request.predicate = [NSPredicate predicateWithFormat:@"sha256 == %@", user.sha256];
     request.resultType = NSCountResultType;
     NSInteger matches = 0;
-    matches = [[self.backgroundContext executeFetchRequest:request error:nil].firstObject integerValue];
+    matches = [[self.writerContext executeFetchRequest:request error:nil].firstObject integerValue];
     if (matches > 0) {
         return YES;
     }
@@ -156,7 +165,7 @@
     request.predicate = [NSPredicate predicateWithFormat:@"sha256 == %@", friend.sha256];
     request.resultType = NSManagedObjectResultType;
     
-    AKFriend *fetchedFriend = [self.backgroundContext executeFetchRequest:request error:nil].firstObject;
+    AKFriend *fetchedFriend = [self.writerContext executeFetchRequest:request error:nil].firstObject;
     fetchedFriend.firstName = friend.firstName;
     fetchedFriend.lastName = friend.lastName;
     fetchedFriend.email = friend.email;
@@ -172,6 +181,16 @@
 
 - (void)saveContextWithCallback:(void(^)(NSError *error))callback {
      __weak typeof(self) weakSelf = self;
+    
+    [self.backgroundContext performBlockAndWait:^{
+        NSError *error = nil;
+        if ([weakSelf.tempContext save:&error])
+        {
+#if DEBUG
+            NSLog(@"%@", error ? [error localizedDescription] : @"Temp Context Saved!");
+#endif
+        }
+    }];
   
         [self.mainContext performBlockAndWait:^{
             NSError *error = nil;
@@ -185,12 +204,12 @@
     
     __block NSError *error = nil;
 
-    [self.backgroundContext performBlockAndWait:^{
+    [self.writerContext performBlockAndWait:^{
         
-        if ([weakSelf.backgroundContext save:&error])
+        if ([weakSelf.writerContext save:&error])
         {
 #if DEBUG
-            NSLog(@"%@", error ? [error localizedDescription] : @"Background Context Saved!");
+            NSLog(@"%@", error ? [error localizedDescription] : @"Writer Context Saved!");
 #endif
         };
     }];

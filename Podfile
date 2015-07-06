@@ -8,6 +8,7 @@ target "CLTestTask" do
 pod 'FastEasyMapping'
 pod "AFNetworking", "~> 2.0"
 pod 'MBProgressHUD', '~> 0.8'
+pod 'SDWebImage'
 
 end
 
