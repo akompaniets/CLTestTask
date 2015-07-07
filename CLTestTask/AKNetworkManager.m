@@ -20,15 +20,15 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [AKNetworkManager new];
-        manager.reachability = [AFNetworkReachabilityManager sharedManager];
-        [manager.reachability setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-           
-            [[NSNotificationCenter defaultCenter] postNotificationName:AKNetworkManagerReachabilityStatusDidChangeNotification object:@{@"status" : @(status)}];
-#if DEBUG
-            NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
-#endif
-        }];
-        [manager.reachability startMonitoring];
+//        manager.reachability = [AFNetworkReachabilityManager sharedManager];
+//        [manager.reachability setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+//           
+//            [[NSNotificationCenter defaultCenter] postNotificationName:AKNetworkManagerReachabilityStatusDidChangeNotification object:@{@"status" : @(status)}];
+//#if DEBUG
+//            NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+//#endif
+//        }];
+//        [manager.reachability startMonitoring];
     });
     
     return manager;

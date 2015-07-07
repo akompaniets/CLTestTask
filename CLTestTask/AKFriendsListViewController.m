@@ -30,6 +30,7 @@
 
 @implementation AKFriendsListViewController
 
+
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {
@@ -126,6 +127,7 @@
     }
     AKFriend *friend = self.fetchedResultsController.fetchedObjects[indexPath.row];
     [cell configureCellForFriend:friend];
+
     return cell;
     
 }

@@ -12,13 +12,13 @@
 #import "AKMappingProvider.h"
 #import "AKUser.h"
 #import <FEMObjectDeserializer.h>
-#import "AKUserHandlerOperation.h"
 #import "AKStorageManager.h"
+#import <SDWebImage/SDWebImageDownloader.h>
 
 @interface AKRandomUsersListModel() 
 
 @property (strong, nonatomic) NSOperationQueue *downloadQueue;
-@property (copy, nonatomic) NSMutableArray *processedUsers;
+@property (strong, nonatomic) NSMutableArray *processedUsers;
 
 @end
 
@@ -52,36 +52,64 @@
     }];
 }
 
-- (void)networkStatusDidChange:(NSNotification *)notification {
-    NSInteger status = [[[notification object] objectForKey:@"status"] integerValue];
-    if (status == 0) {
-        if (!self.downloadQueue.isSuspended) {
-            [self.downloadQueue setSuspended:YES];
-            NSLog(@"Download queue on pause.");
-        }
-    } else {
-        [self.downloadQueue setSuspended:NO];
-        NSLog(@"Download queue on resume.");
-    }
-}
+//- (void)networkStatusDidChange:(NSNotification *)notification {
+//    NSInteger status = [[[notification object] objectForKey:@"status"] integerValue];
+//    if (status == 0) {
+//        if (!self.downloadQueue.isSuspended) {
+//            [self.downloadQueue setSuspended:YES];
+//            NSLog(@"Download queue on pause.");
+//        }
+//    } else {
+//        [self.downloadQueue setSuspended:NO];
+//        NSLog(@"Download queue on resume.");
+//    }
+//}
 
 - (void)saveSelectedUsers:(NSArray *)selectedUsers withCompletionHandler:(void(^)())completionHandler {
     
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(networkStatusDidChange:)
-                                                     name:AKNetworkManagerReachabilityStatusDidChangeNotification
-                                                   object:nil];
+    self.processedUsers = [NSMutableArray array];
         for (AKUser *user in selectedUsers) {
-            AKUserHandlerOperation *operation = [[AKUserHandlerOperation alloc] initWithUser:user];
-            operation.name = user.sha256;
-            [self.downloadQueue addOperation:operation];
+            [self.downloadQueue addOperationWithBlock:^{
+                NSString *photoName = [NSString stringWithFormat:@"photo_%@", user.sha256];
+                NSString *thumbnailName = [NSString stringWithFormat:@"thumbnail_%@", user.sha256];
+                [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:user.photoUrl]
+                                                                      options:0
+                                                                     progress:nil
+                                                                    completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                                                                        if (finished && data) {
+                                                                            [AKStorageManager saveImageData:data withName:photoName];
+                                                                        }
+                                                                        else {
+#if DEBUG
+                                                                            NSLog(@"%@", [error localizedDescription]);
+#endif
+                                                                        }
+                    
+                                                                    }];
+                [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:user.photoUrl]
+                                                                      options:0
+                                                                     progress:nil
+                                                                    completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                                                                        if (finished && data) {
+                                                                            [AKStorageManager saveImageData:data withName:thumbnailName];
+                                                                        }
+                                                                        else {
+#if DEBUG
+                                                                            NSLog(@"%@", [error localizedDescription]);
+#endif
+                                                                        }
+                                                                        
+                                                                    }];
+                
+                user.photoName = photoName;
+                user.thumbnailName = thumbnailName;
+            }];
+            [self.processedUsers addObject:user];
         }
         
         [self.downloadQueue addObserver:self forKeyPath:@"operations" options:0 context:NULL];
         
-    });
+//    });
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:AKRandomUsersListModelDidChangeUserHandlingStatusNotification
                                                             object:@{@"status" : @(DidStartUserHandling)}];
@@ -93,6 +121,7 @@
     
     if (object == self.downloadQueue && [keyPath isEqualToString:@"operations"]) {
         if ([self.downloadQueue.operations count] == 0) {
+            [[AKDatabaseManager sharedManager] saveUsers:self.processedUsers withCompletionHandler:nil];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:AKRandomUsersListModelDidChangeUserHandlingStatusNotification
                                                                     object:@{@"status" : @(DidFinishUserHandling)}];
@@ -130,6 +159,6 @@
 #pragma mark - dealloc
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AKNetworkManagerReachabilityStatusDidChangeNotification];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AKNetworkManagerReachabilityStatusDidChangeNotification];
 }
 @end

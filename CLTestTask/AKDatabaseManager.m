@@ -77,7 +77,8 @@
 - (NSManagedObjectContext *)backgroundContext {
     if (!_backgroundContext) {
         _backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        _backgroundContext.parentContext = self.mainContext;
+//        _backgroundContext.parentContext = self.mainContext;
+        _backgroundContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
     }
     return _backgroundContext;
 }
@@ -121,11 +122,12 @@
 
 - (void)saveUsers:(NSArray *)users withCompletionHandler:(void(^)(NSError *error))completionHandler {
     __weak typeof(self) weakSelf = self;
-    for (AKUser *currentUser in users) {
-        if ([self checkUserForExisting:currentUser]) {
-            continue;
-        }
-        [weakSelf.backgroundContext performBlock:^{
+    
+    [weakSelf.backgroundContext performBlock:^{
+        for (AKUser *currentUser in users) {
+            if ([weakSelf checkUserForExisting:currentUser]) {
+                continue;
+            }
             AKFriend *friend = [NSEntityDescription insertNewObjectForEntityForName:@"AKFriend" inManagedObjectContext:weakSelf.backgroundContext];
             
             friend.title = currentUser.title;
@@ -139,9 +141,8 @@
             friend.thumbnailURL = currentUser.thumbnailUrl;
             friend.photoURL = currentUser.photoUrl;
             friend.isFriend = @YES;
-        }];
-        
-    }
+        }
+    }];
     
     [self saveContextWithCallback:^(NSError *error) {
         if (completionHandler) {
@@ -185,38 +186,38 @@
 
 - (void)saveContextWithCallback:(void(^)(NSError *error))callback {
      __weak typeof(self) weakSelf = self;
-    
+    __block NSError *error = nil;
     [self.backgroundContext performBlockAndWait:^{
-        NSError *error = nil;
+        
         if ([weakSelf.backgroundContext save:&error])
         {
 #if DEBUG
-            NSLog(@"%@", error ? [error localizedDescription] : @"Temp Context Saved!");
+            NSLog(@"%@", error ? [error localizedDescription] : @"Background Context Saved!");
 #endif
         }
     }];
   
-        [self.mainContext performBlockAndWait:^{
-            NSError *error = nil;
-            if ([weakSelf.mainContext save:&error])
-            {
-#if DEBUG
-                NSLog(@"%@", error ? [error localizedDescription] : @"Main Context Saved!");
-#endif
-            }
-        }];
-    
-    __block NSError *error = nil;
-
-    [self.writerContext performBlockAndWait:^{
-        
-        if ([weakSelf.writerContext save:&error])
-        {
-#if DEBUG
-            NSLog(@"%@", error ? [error localizedDescription] : @"Writer Context Saved!");
-#endif
-        };
-    }];
+//        [self.mainContext performBlockAndWait:^{
+//            NSError *error = nil;
+//            if ([weakSelf.mainContext save:&error])
+//            {
+//#if DEBUG
+//                NSLog(@"%@", error ? [error localizedDescription] : @"Main Context Saved!");
+//#endif
+//            }
+//        }];
+//    
+//    __block NSError *error = nil;
+//
+//    [self.writerContext performBlockAndWait:^{
+//        
+//        if ([weakSelf.writerContext save:&error])
+//        {
+//#if DEBUG
+//            NSLog(@"%@", error ? [error localizedDescription] : @"Writer Context Saved!");
+//#endif
+//        };
+//    }];
     if (callback) {
         callback(error);
     }
