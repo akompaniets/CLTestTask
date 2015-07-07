@@ -113,30 +113,34 @@
     request.predicate = [NSPredicate predicateWithFormat:@"sha256 == %@", friend.sha256];
     request.resultType = NSManagedObjectResultType;
     
+    
     AKFriend *fetchedFriend = [self.backgroundContext executeFetchRequest:request error:nil].firstObject;
     fetchedFriend.isFriend = @NO;
     [self saveContextWithCallback:nil];
 }
 
 - (void)saveUsers:(NSArray *)users withCompletionHandler:(void(^)(NSError *error))completionHandler {
-    
+    __weak typeof(self) weakSelf = self;
     for (AKUser *currentUser in users) {
         if ([self checkUserForExisting:currentUser]) {
             continue;
         }
-        AKFriend *friend = [NSEntityDescription insertNewObjectForEntityForName:@"AKFriend" inManagedObjectContext:self.mainContext];
+        [weakSelf.backgroundContext performBlock:^{
+            AKFriend *friend = [NSEntityDescription insertNewObjectForEntityForName:@"AKFriend" inManagedObjectContext:weakSelf.backgroundContext];
+            
+            friend.title = currentUser.title;
+            friend.firstName = currentUser.firstName;
+            friend.lastName = currentUser.lastName;
+            friend.sha256 = currentUser.sha256;
+            friend.email = currentUser.email;
+            friend.phone = currentUser.phone;
+            friend.thumbnailName = currentUser.thumbnailName;
+            friend.photoName = currentUser.thumbnailName;
+            friend.thumbnailURL = currentUser.thumbnailUrl;
+            friend.photoURL = currentUser.photoUrl;
+            friend.isFriend = @YES;
+        }];
         
-        friend.title = currentUser.title;
-        friend.firstName = currentUser.firstName;
-        friend.lastName = currentUser.lastName;
-        friend.sha256 = currentUser.sha256;
-        friend.email = currentUser.email;
-        friend.phone = currentUser.phone;
-        friend.thumbnailName = currentUser.thumbnailName;
-        friend.photoName = currentUser.thumbnailName;
-        friend.thumbnailURL = currentUser.thumbnailUrl;
-        friend.photoURL = currentUser.photoUrl;
-        friend.isFriend = @YES;
     }
     
     [self saveContextWithCallback:^(NSError *error) {
@@ -152,7 +156,7 @@
     request.predicate = [NSPredicate predicateWithFormat:@"sha256 == %@", user.sha256];
     request.resultType = NSCountResultType;
     NSInteger matches = 0;
-    matches = [[self.writerContext executeFetchRequest:request error:nil].firstObject integerValue];
+    matches = [[self.backgroundContext executeFetchRequest:request error:nil].firstObject integerValue];
     if (matches > 0) {
         return YES;
     }
@@ -165,7 +169,7 @@
     request.predicate = [NSPredicate predicateWithFormat:@"sha256 == %@", friend.sha256];
     request.resultType = NSManagedObjectResultType;
     
-    AKFriend *fetchedFriend = [self.writerContext executeFetchRequest:request error:nil].firstObject;
+    AKFriend *fetchedFriend = [self.backgroundContext executeFetchRequest:request error:nil].firstObject;
     fetchedFriend.firstName = friend.firstName;
     fetchedFriend.lastName = friend.lastName;
     fetchedFriend.email = friend.email;
@@ -184,7 +188,7 @@
     
     [self.backgroundContext performBlockAndWait:^{
         NSError *error = nil;
-        if ([weakSelf.tempContext save:&error])
+        if ([weakSelf.backgroundContext save:&error])
         {
 #if DEBUG
             NSLog(@"%@", error ? [error localizedDescription] : @"Temp Context Saved!");

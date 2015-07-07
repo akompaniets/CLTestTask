@@ -186,12 +186,22 @@
                                                    cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
-    NSError *error = nil;
-        if (![self.fetchedResultsController performFetch:&error])
-        {
-            NSLog(@"Fetching error %@, %@", error, [error userInfo]);
-            abort();
-        }
+    __weak typeof(self) weakSelf = self;
+    [self.fetchedResultsController.managedObjectContext performBlock:^{
+        NSError *error = nil;
+                if (![weakSelf.fetchedResultsController performFetch:&error])
+                {
+                    NSLog(@"Fetching error %@, %@", error, [error userInfo]);
+                    abort();
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf.tableView reloadData];
+                    });
+                    
+                }
+    }];
+    
+
 
 
     return _fetchedResultsController;
@@ -228,7 +238,11 @@
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView endUpdates];
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf.tableView endUpdates];
+    });
+    
 }
 
 - (void)dealloc {
